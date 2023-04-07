@@ -1,0 +1,22 @@
+{
+  "schedule": [
+    {
+      "title": " this thing to do",
+      "date": "22/01/2023",
+      "description": "its a thing you have to do",
+      "id": 1
+    },
+    {
+      "title": "other thing to do",
+      "date": "23/01/2023",
+      "description": "its a thing you have to do",
+      "id": 2
+    },
+    {
+      "title": "yet another thing to do",
+      "date": "24/01/2023",
+      "description": "its a thing you have to do",
+      "id": 2
+    }
+  ]
+}
