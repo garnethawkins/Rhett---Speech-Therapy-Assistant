@@ -572,20 +572,19 @@
         // document.getElementById('link').addEventListener("mouseover", j_intro.play())
 
         // this is the auto start up intro, its a little annoying when coding so turned it off
-const datetime = new Date();
-const hours = datetime.getHours()
-const minutes = datetime.getMinutes()
-const time = hours + ':' + minutes
-console.log(time)
+const replydatetime = new Date();
+const replyhours = replydatetime.getHours()
+
+
         loadsound.play();
         loadsound.onended = () => {
             readOut("...");
             readOut("...");
             readOut("...");
-            if (hours < '12'){
+            if (replyhours < '12'){
                 readOut("good morning master Hawkins")
             }
-            else if(hours > '12' && hours <'16')
+            else if(replyhours > '12' && replyhours <'16')
             {
                 readOut("good afternoon master hawkins")
     

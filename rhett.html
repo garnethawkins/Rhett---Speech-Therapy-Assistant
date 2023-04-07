@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="A.D.A.M" />
-    <title>A.D.A.M</title>
+    <meta name="description" content="Rhett_AI - Your personal AI speech Therapist" />
+    <title>Rhett AI Speech Therapist</title>
     <style>
         @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,400;0,600;0,700;1,100;1,400;1,500&display=swap");
 
@@ -240,16 +240,9 @@
             display: none;
         }
 
-        .commands {
-            display: none;
-            background-color: rgb(8, 6, 6);
-        }
+    
 
-        .commands p {
-            color: rgb(197, 0, 0);
-        }
-
-        #start_jarvis_btn {
+        #start_rhett_btn {
             border: seashell;
             outline: none;
             position: fixed;
@@ -262,15 +255,15 @@
 
         }
 
-        #start_jarvis_btn p {
+        #start_rhett_btn p {
             font-size: 30px;
         }
 
-        #start_jarvis_btn img {
+        #start_rhett_btn img {
             height: 300px;
         }
 
-        #stop_jarvis_btn {
+        #stop_rhett_btn {
 
             left: 70%;
 
@@ -282,16 +275,16 @@
             display: none;
         }
 
-        #stop_jarvis_btn p {
+        #stop_rhett_btn p {
             font-size: 30px;
         }
 
-        #stop_jarvis_btn img {
+        #stop_rhett_btn img {
             height: 300px;
             filter: blur(5px);
         }
 
-        #jarvis_listening {
+        #rhett_listening {
             display: none;
             border: 10px solid rgba(238, 251, 255, 0.544);
             border-radius: 10%;
@@ -311,33 +304,10 @@
             text-align: center
         }
 
-        .small_jarvis {
-            position: absolute;
-            top: calc(100vh - 670px);
-            left: calc(100vw - 670px);
-        }
+     
 
-        .small_jarvis button {
-            background-color: rgba(41, 38, 38, 0.541);
-            background-image: url('smallbuttonbackground.png');
-            background-size: auto 75%;
-            background-repeat: no-repeat;
-            height: 100px;
-            width: 20px;
-            top: 200px;
-            left: 90.3%;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            outline: none;
-            border: none;
-        }
 
-        .small_jarvis button p {
-            font-size: 50px;
-        }
-
-        .new_jarvis_window {
+        .new_rhett_window {
             display: none;
         }
 
@@ -433,10 +403,6 @@
                 width: 200px;
             }
 
-            .small_jarvis button {
-                display: none;
-            }
-
             .clock_hidden {
                 display: none;
             }
@@ -470,16 +436,16 @@
                 font-size: 10px
             }
 
-            #start_jarvis_btn {
+            #start_rhett_btn {
                 left: 50%;
                 top: 80vh;
             }
 
-            #start_jarvis_btn p {
+            #start_rhett_btn p {
                 font-size: 15px;
             }
 
-            #stop_jarvis_btn {
+            #stop_rhett_btn {
 
                 left: 50%;
 
@@ -491,7 +457,7 @@
                 display: none;
             }
 
-            #stop_jarvis_btn p {
+            #stop_rhett_btn p {
                 font-size: 15px;
                 color: red
             }
@@ -575,11 +541,11 @@
                 display: none;
             }
 
-            .new_jarvis_window {
+            .new_rhett_window {
                 display: block;
             }
 
-            #start_jarvis_btn {
+            #start_rhett_btn {
                 display: none;
             }
         } */
@@ -589,7 +555,7 @@
 </head>
 
 <body>
-
+<!--#region html-->
     <audio src="./power up.mp3" id="turn_on"></audio>
     
     <audio src="./newpowerup.mp3" id="loadsound"></audio>
@@ -627,132 +593,51 @@
         </button>
     </form>
 
-    <button id="start_jarvis_btn" class="hide_on_small">
+    <button id="start_rhett_btn" class="hide_on_small">
 
         <p>Start Recognition</p>
     </button>
-    <textarea id="jarvis_listening"></textarea>
+    <textarea id="rhett_listening"></textarea>
 
-    <button id="stop_jarvis_btn" class="hide_on_small">
-        <!-- <img src="4ff0650a75cd3cfaf6c6b713391588ab.gif" alt="start jarvis" />
+    <button id="stop_rhett_btn" class="hide_on_small">
+        <!-- <img src="4ff0650a75cd3cfaf6c6b713391588ab.gif" alt="start rhett" />
         -->
         <p>Stop Recognition</p>
     </button>
 
-    <div class="small_jarvis hide_on_small">
-        <button id="small_jarvis">
 
-        </button>
-    </div>
+<!--#endregion-->
   
-
-
-    <!-- <div class="messages hide_on_small"></div> -->
-
-    <div class="commands in_middle hide_on_small"></div>
-
-    <div class="new_jarvis_window">
-        <img src="./heart.gif" height="230" id="jarvis_start" />
-    </div>
-
-
     <script>
 
-        //#region searchbar
-        const f = document.getElementById('form');
-        const q = document.getElementById('query');
-        const google = 'https://www.google.com/search?q=';
-
-
-        function submitted(event) {
-            event.preventDefault();
-            const url = google + '+' + q.value;
-            const win = window.open(url, '_blank', 'toolbar=0,location=0,menubar=0');
-            win.focus();
-            document.getElementById('query').value = ''
-        }
-
-        f.addEventListener('submit', submitted);
-
-        //#endregion
-        
-        // vars and elements
-        const turn_on = document.querySelector("#turn_on");
        
-        const time = document.querySelector("#clocktime");
-        const machine = document.querySelector(".machine");
-        // const msgs = document.querySelector(".messages");
-        // whether the recognition is stopiing on my command or automatically
-        let stopingR = false;
-        // friday's commands
-        let fridayComs = [];
-        fridayComs.push("rhett");
-        fridayComs.push("What are your commands");
-        fridayComs.push("Current Charge");
-        fridayComs.push("Charge Status");
-        fridayComs.push("Connection Status");
-        fridayComs.push("shut down - to turn off voice recognition");
-        fridayComs.push('search for "your keywords" - to search on google ');
-
-
-        // youtube window
-        let ytbWindow;
-
-        // create a new message
-        // function createMsg(who, msg) {
-        //   let newmsg = document.createElement("p");
-        //   newmsg.innerText = msg;
-        //   newmsg.setAttribute("class", who);
-        //   msgs.appendChild(newmsg);
-        // }
-
-        // show a warn to check for all the commands
-        //console.warn('*to check for the commands say "what are your commands"');
-
-        // date and time
-        let date = new Date();
-        let hrs = date.getHours();
-        let mins = date.getMinutes();
-        let secs = date.getSeconds();
-
-        // this is what friday tells about weather
-        let weatherStatement = "";
-        let charge, chargeStatus, connectivity, currentTime
-        chargeStatus = "unplugged"
-
+       //#region on load
         window.onload = () => {
 
-            // this is the auto start up intro, its a little annoying when coding so turned it off
-
-            //loadsound.play();
-            // readOut("...");
-            // readOut("...");
-            // readOut("...");
-            // readOut("allow me to introduce myself");
-            // readOut("I am rhett, your automated digital assistant manager, and I am here to assist you with a variety of tasks as best I can... twenty four hours a day, seven days a week...");
-
-            // readOut("Importing all preferences from system register...");
-
-            // readOut("...");
-
-            // readOut("...");
             recognition.start()
 
-            // window.onloadstart = () => {
-            //     window.open(`${window.location.href}`, "newWindow", "menubar=true,location=true,resizable=false,scrollbars=false,width=200,height=200,top=0,left=0")
-            // }
-            window.addEventListener('load', (event) => {
+            readOut('systems are now fully operational, lets get started')
+           
+            //#region ui vars and elements
+        const turn_on = document.querySelector("#turn_on");
+       
+       const time = document.querySelector("#clocktime");
+       const machine = document.querySelector(".machine");
+       // const msgs = document.querySelector(".messages");
+       // whether the recognition is stopiing on my command or automatically
+       let stopingR = false;
+   
+      
+       // date and time
+       let date = new Date();
+       let hrs = date.getHours();
+       let mins = date.getMinutes();
+       let secs = date.getSeconds();
 
-                if (window.innerWidth >= 401) {
-                    window.open(`${window.location.href}`, "newWindow", "menubar=true,location=true,resizable=false,scrollbars=false,width=200,height=200,top=0,left=0")
+    
+       let charge, chargeStatus, connectivity, currentTime
+       chargeStatus = "unplugged"
 
-                }
-            })
-            document.querySelector(".commands").style.display = "none"
-            //win
-            fridayComs.forEach((e) => {
-                document.querySelector(".commands").innerHTML += `<p>#${e}</p><br />`;
-            });
             // battery
             let batteryPromise = navigator.getBattery();
             batteryPromise.then(batteryCallback);
@@ -807,72 +692,14 @@
                 //want vocal alerts for charging battery disconnected cable and low battery
 
             }
-
-
-
+       //#endregion
+           
         };
 
-        // timer
-        setInterval(() => {
-            let date = new Date();
-            let hrs = date.getHours();
-            let mins = date.getMinutes();
-            let secs = date.getSeconds();
 
-            hrs = hrs % 12;
-            hrs = hrs ? hrs : 12;
-            hrs = hrs < 10 ? "0" + hrs : hrs;
-            var ampm = hrs >= 12 ? 'PM' : 'AM';
-            mins = mins < 10 ? "0" + mins : mins;
-            secs = secs < 10 ? "0" + secs : secs;
-            clocktime.textContent = `${hrs}:${mins}`;
-            hiddenclocktime.textContent = `${hrs}:${mins}:${secs}${ampm}`;
-            hiddensecondcounter.textContent = `${secs}`
-            if (hiddenclocktime.innerText == '05:57:00AM') {
-                readOut("its time to wake the children sir");
-            }
-        }, 1000);
+        //#endregion
 
-
-
-
-        // auto friday
-
-        // function autoJarvis() {
-        //     setTimeout(() => {
-        //         recognition.start();
-        //     }, 1000);
-        // }
-
-        const activeList = [
-            "my voice systems are now active",
-            "voice control activated",
-            "I am now capable of executing commands via voice control"
-        ];
-
-        const systemActive = activeList[Math.floor(Math.random() * activeList.length)];
-
-        // 
-        // start jarvis with btn
-        document.querySelector("#start_jarvis_btn").onclick = function () {
-            recognition.start();
-            readOut(systemActive)
-            //document.getElementById("small_jarvis").style.display = "block";
-
-        }
-
-
-        document.querySelector("#stop_jarvis_btn").addEventListener("click", () => {
-            stopingR = true;
-            recognition.stop();
-            //location.reload();
-        })
-
-
-
-
-
-        // speech recognition
+        //#region speech recognition
 
         // speech lang
 
@@ -892,24 +719,14 @@
 
         var synth = window.speechSynthesis
 
-        document.querySelector("#jarvis_start").addEventListener("click", () => {
-            recognition.start()
-            window.blur();
-        })
 
         recognition.onstart = function () {
             console.log("voice recognition activated");
-            document.querySelector("#stop_jarvis_btn").style.display = "flex"
-            document.querySelector("#start_jarvis_btn").style.display = "none"
-            document.querySelector("#jarvis_listening").style.display = "flex"
+            document.querySelector("#stop_rhett_btn").style.display = "flex"
+            document.querySelector("#start_rhett_btn").style.display = "none"
+            document.querySelector("#rhett_listening").style.display = "flex"
 
         };
-
-        // function autoJarvis() {
-        //     setTimeout(() => {
-        //         recognition.start();
-        //     }, 1000);
-        // }
 
 
         recognition.onend = () => {
@@ -921,101 +738,26 @@
 
             } else if (stopingR === true) {
                 recognition.stop();
-                document.querySelector("#stop_jarvis_btn").style.display = "none"
-                document.querySelector("#start_jarvis_btn").style.display = "flex"
-                document.querySelector("#jarvis_listening").style.display = "none"
+                document.querySelector("#stop_rhett_btn").style.display = "none"
+                document.querySelector("#start_rhett_btn").style.display = "flex"
+                document.querySelector("#rhett_listening").style.display = "none"
             }
         };
-
-        // speak 
-
-        function readOut(message) {
-            const speech = new SpeechSynthesisUtterance();
-            var voices = window.speechSynthesis.getVoices();
-            speech.default = false;
-            //alternate voice
-            speech.voice = voices.filter(function (voice) { return voice.name == 'Microsoft George - English (United Kingdom)'; })[0];
-            speech.pitch = 1.3;
-            speech.lang = 'en-GB'; //Also added as for some reason android devices used for testing loaded spanish language 
-            //speech.pitch = 0;
-            speech.rate = 1.1
-            speech.text = message;
-            speech.volume = 1;
-            window.speechSynthesis.speak(speech);
-            console.log("reading out");
-
-
-            // createMsg("jmsg", message);
-        }
-
-        readOut('systems are now fully operational, lets get started')
-
-
-        //todays date
-        const today = new Date();
-        const yyyy = today.getFullYear();
-        let mm = today.getMonth() + 1; // Months start at 0!
-        let dd = today.getDate();
-
-        if (dd < 10) dd = '0' + dd;
-        if (mm < 10) mm = '0' + mm;
-
-        const formattedToday = dd + '/' + mm + '/' + yyyy;
-        console.log(formattedToday)
-
-        //check schedule
-        const jsondatacall = fetch('./data.json')
-            .then((response) => response.json())
-            //.then((json) => console.log(json))
-            .then((json) => {
-                const jsondata = JSON.stringify(json);
-                const jsondata2 = JSON.parse(jsondata)
-                let x = 0;
-
-                for (x; x < jsondata2.schedule.length; x++) {
-                    //console.log(jsondata2.schedule[x].date);
-                    if (jsondata2.schedule[x].date === formattedToday) {
-
-                        //readOut('systems are now fully operational')
-                        readOut(' . . . .')
-                        readOut(' . . . .')
-                        readOut(' . . . .')
-                        readOut(' . . . .')
-                        readOut('pardon me sir, but it is urgent you complete' + jsondata2.schedule[x].title);
-                        //alert('complete' + jsondata2.schedule[x].title)-+        .,.
-
-                    }
-
-
-
-
-                }
-            });
-
-
-        // //.then(obj = JSON.parse(json))
-        // //.then(console.log(json[1]));
-
-        // console.log(JSON.stringify(jsondata))
-
-
-
-
-        // arr of window
-        let windowsB = []
-
+        const replydatetime = new Date();
+        const replyhours = replydatetime.getHours()
+        
         recognition.onresult = function (event) {
             let current = event.resultIndex;
             let transcript = event.results[current][0].transcript;
             transcript = transcript.toLowerCase();
             // minor bug here, recognition  error when transcribing speechsynthesis
-            if (event.results[current][0].confidence > .87) {
-                document.querySelector("#jarvis_listening").textContent = event.results[current][0].transcript;
+            if (event.results[current][0].confidence > .9) {
+                document.querySelector("#rhett_listening").textContent = event.results[current][0].transcript;
                 //+ "confidence" + event.results[current][0].confidence;
             }
-            console.log(transcript);
+            console.log("confidence" + event.results[current][0].confidence);
             // createMsg("usermsg", transcript);
-            // commands
+         
             // hi - hello
 
 
@@ -1056,6 +798,37 @@
                     readOut(earsOn);
                 }
                
+                if (transcript.includes("hi")){
+                    if (replyhours < '12')
+                    {
+                        readOut("good morning master Hawkins")
+                    }
+                else if(replyhours > '12' && replyhours <'16')
+                    {
+                        readOut("good afternoon master hawkins")
+    
+                    }
+                else
+                    {
+                        readOut("good evening master hawkins ")
+                    }
+                }
+
+                if (transcript.includes("hello")){
+                    if (replyhours < '12')
+                    {
+                        readOut("good morning master Hawkins")
+                    }
+                else if(replyhours > '12' && replyhours <'16')
+                    {
+                        readOut("good afternoon master hawkins")
+    
+                    }
+                else
+                    {
+                        readOut("good evening master hawkins ")
+                    }
+                }
 
 
 
@@ -1072,26 +845,9 @@
                 if (transcript.includes("connection status")) {
                     readOut(`you are ${connectivity} sir`);
                 }
-                // jarvis commands
-                if (transcript.includes("what are your commands")) {
-                    readOut("sir here's the list of commands i can follow");
-                    if (window.innerWidth <= 400) {
-                        window.resizeTo(screen.width, screen.height)
-                    }
-                    document.querySelector(".commands").style.display = "block";
-                }
-
-
-                // close popups
-                if (transcript.includes("close command list")) {
-                    readOut("closing the tab sir");
-                    document.querySelector(".commands").style.display = "none";
-                    if (window.innerWidth >= 401) {
-                        window.resizeTo(250, 250)
-                    }
-
-                }
-
+          
+              
+              
 
 
 
@@ -1151,25 +907,143 @@
 
         }
 
+        const activeList = [
+            "my voice systems are now active",
+            "voice control activated",
+            "I am now capable of executing commands via voice control"
+        ];
+
+        const systemActive = activeList[Math.floor(Math.random() * activeList.length)];
+
+        // 
+        // start rhett with btn
+        document.querySelector("#start_rhett_btn").onclick = function () {
+            recognition.start();
+            readOut(systemActive)
+         
+
+        }
 
 
-
-
-
-        // small jarvis
-        const smallJarvis = document.querySelector("#small_jarvis")
-
-
-
-        smallJarvis.addEventListener("click", () => {
-            window.open(`${window.location.href}`, "newWindow", "menubar=true,location=true,resizable=false,scrollbars=false,width=800,height=400,top=0,left=0")
-            this.window.close();
+        document.querySelector("#stop_rhett_btn").addEventListener("click", () => {
+            stopingR = true;
+            recognition.stop();
+            //location.reload();
         })
 
 
+//#endregion
+
+        //#region speech synthesis
+
+        function readOut(message) {
+            const speech = new SpeechSynthesisUtterance();
+            var voices = window.speechSynthesis.getVoices();
+            speech.default = false;
+            //alternate voice
+            speech.voice = voices.filter(function (voice) { return voice.name == 'Microsoft George - English (United Kingdom)'; })[0];
+            speech.pitch = 1.3;
+            speech.lang = 'en-GB'; //Also added as for some reason android devices used for testing loaded spanish language 
+            //speech.pitch = 0;
+            speech.rate = 1.1
+            speech.text = message;
+            speech.volume = 1;
+            window.speechSynthesis.speak(speech);
+            console.log("reading out");
+
+
+            // createMsg("jmsg", message);
+        }
+//#endregion
+       
+        //#region schedule
+
+        // timer
+        setInterval(() => {
+            let date = new Date();
+            let hrs = date.getHours();
+            let mins = date.getMinutes();
+            let secs = date.getSeconds();
+
+            hrs = hrs % 12;
+            hrs = hrs ? hrs : 12;
+            hrs = hrs < 10 ? "0" + hrs : hrs;
+            var ampm = hrs >= 12 ? 'PM' : 'AM';
+            mins = mins < 10 ? "0" + mins : mins;
+            secs = secs < 10 ? "0" + secs : secs;
+            clocktime.textContent = `${hrs}:${mins}`;
+            hiddenclocktime.textContent = `${hrs}:${mins}:${secs}${ampm}`;
+            hiddensecondcounter.textContent = `${secs}`
+            if (hiddenclocktime.innerText == '05:57:00AM') {
+                readOut("its time to wake the children sir");
+            }
+        }, 1000);
 
 
 
+        //todays date
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        let mm = today.getMonth() + 1; // Months start at 0!
+        let dd = today.getDate();
+
+        if (dd < 10) dd = '0' + dd;
+        if (mm < 10) mm = '0' + mm;
+
+        const formattedToday = dd + '/' + mm + '/' + yyyy;
+        console.log(formattedToday)
+
+        //check schedule
+        const jsondatacall = fetch('./data.json')
+            .then((response) => response.json())
+            //.then((json) => console.log(json))
+            .then((json) => {
+                const jsondata = JSON.stringify(json);
+                const jsondata2 = JSON.parse(jsondata)
+                let x = 0;
+
+                for (x; x < jsondata2.schedule.length; x++) {
+                    //console.log(jsondata2.schedule[x].date);
+                    if (jsondata2.schedule[x].date === formattedToday) {
+
+                        //readOut('systems are now fully operational')
+                        readOut(' . . . .')
+                        readOut(' . . . .')
+                        readOut(' . . . .')
+                        readOut(' . . . .')
+                        readOut('pardon me sir, but it is urgent you complete' + jsondata2.schedule[x].title);
+                        //alert('complete' + jsondata2.schedule[x].title)-+        .,.
+
+                    }
+
+
+
+
+                }
+            });
+
+
+//#endregion
+
+        //#region searchbar
+        const f = document.getElementById('form');
+        const q = document.getElementById('query');
+        const google = 'https://www.google.com/search?q=';
+
+
+        function submitted(event) {
+            event.preventDefault();
+            const url = google + '+' + q.value;
+            const win = window.open(url, '_blank', 'toolbar=0,location=0,menubar=0');
+            win.focus();
+            document.getElementById('query').value = ''
+        }
+
+        f.addEventListener('submit', submitted);
+
+        //#endregion
+        
+       
     </script>
 </body>
 
