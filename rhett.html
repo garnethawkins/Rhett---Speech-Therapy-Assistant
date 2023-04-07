@@ -589,9 +589,9 @@
 </head>
 
 <body>
-    <audio src="./Jarvis.mp3" id="j_intro"></audio>
+
     <audio src="./power up.mp3" id="turn_on"></audio>
-    <audio src="./myjams.mp3" id="myjams"></audio>
+    
     <audio src="./newpowerup.mp3" id="loadsound"></audio>
 
     <div class="machine hide_on_small">
@@ -678,7 +678,7 @@
         
         // vars and elements
         const turn_on = document.querySelector("#turn_on");
-        const jarvis_intro = document.querySelector("#j_intro");
+       
         const time = document.querySelector("#clocktime");
         const machine = document.querySelector(".machine");
         // const msgs = document.querySelector(".messages");
@@ -1055,14 +1055,7 @@
                 if (transcript.includes("ears on")) {
                     readOut(earsOn);
                 }
-                if (transcript.includes("play my jams"))
-                    myjams.play();
-
-                if (transcript.includes("drop my needle"))
-                    myjams.play();
-                if (transcript.includes("kill the music"))
-                    myjams.pause();
-
+               
 
 
 
