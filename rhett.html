@@ -35,7 +35,7 @@
             align-items: center;
         }
 
-       #wordOrPhrase{
+        #wordOrPhrase {
             color: white;
             position: fixed;
             top: 25%;
@@ -246,7 +246,7 @@
             display: none;
         }
 
-    
+
 
         #start_rhett_btn {
             border: seashell;
@@ -310,7 +310,7 @@
             text-align: center
         }
 
-     
+
 
 
         .new_rhett_window {
@@ -561,9 +561,9 @@
 </head>
 
 <body>
-<!--#region html-->
+    <!--#region html-->
     <audio src="./power up.mp3" id="turn_on"></audio>
-    
+
     <audio src="./newpowerup.mp3" id="loadsound"></audio>
 
     <div class="machine hide_on_small">
@@ -588,7 +588,7 @@
 
         <!-- <img src="./iron_man.gif" id="iron_man" /> -->
     </div>
-    
+
     <form id="form" class="searchform">
         <input id="query" name="q" placeholder="Search...">
         <button id="searchbox" type="button-btn">
@@ -599,8 +599,8 @@
             </svg>
         </button>
     </form>
-    <div class="requiredWordOrPhrase" id = "wordOrPhrase">continue</div>
-  
+    <div class="requiredWordOrPhrase" id="wordOrPhrase">continue</div>
+
     <button id="start_rhett_btn" class="hide_on_small">
 
         <p>Start Recognition</p>
@@ -614,46 +614,46 @@
     </button>
 
 
-<!--#endregion-->
-  
+    <!--#endregion-->
+
     <script>
 
-       
+
         //#region on load
         window.onload = () => {
             recognition.start()
             //check level
             const lvlcheck = localStorage.getItem("lvl")
-            if(!lvlcheck) {
+            if (!lvlcheck) {
                 localStorage.setItem("lvl", 'level1')
                 readOut('systems are now fully operational, lets get started')
             }
-            else{
+            else {
                 readOut('systems are now fully operational, shall we continue?')
             }
-         
 
-            
-           
+
+
+
             //#region ui vars and elements
-        const turn_on = document.querySelector("#turn_on");
-       
-       const time = document.querySelector("#clocktime");
-       const machine = document.querySelector(".machine");
-       // const msgs = document.querySelector(".messages");
-       // whether the recognition is stopiing on my command or automatically
-       let stopingR = false;
-   
-      
-       // date and time
-       let date = new Date();
-       let hrs = date.getHours();
-       let mins = date.getMinutes();
-       let secs = date.getSeconds();
+            const turn_on = document.querySelector("#turn_on");
 
-    
-       let charge, chargeStatus, connectivity, currentTime
-       chargeStatus = "unplugged"
+            const time = document.querySelector("#clocktime");
+            const machine = document.querySelector(".machine");
+            // const msgs = document.querySelector(".messages");
+            // whether the recognition is stopiing on my command or automatically
+            let stopingR = false;
+
+
+            // date and time
+            let date = new Date();
+            let hrs = date.getHours();
+            let mins = date.getMinutes();
+            let secs = date.getSeconds();
+
+
+            let charge, chargeStatus, connectivity, currentTime
+            chargeStatus = "unplugged"
 
             // battery
             let batteryPromise = navigator.getBattery();
@@ -709,8 +709,8 @@
                 //want vocal alerts for charging battery disconnected cable and low battery
 
             }
-       //#endregion
-           
+            //#endregion
+
         };
 
 
@@ -763,7 +763,7 @@
         };
         const replydatetime = new Date();
         const replyhours = replydatetime.getHours()
-        
+
 
         //#region random phrase spoken when recognition running manually
         const activeList = [
@@ -773,13 +773,13 @@
         ];
 
         const systemActive = activeList[Math.floor(Math.random() * activeList.length)];
-//#endregion
-        
+        //#endregion
+
         //#region start/stop rhett with btn
         document.querySelector("#start_rhett_btn").onclick = function () {
             recognition.start();
             readOut(systemActive)
-         
+
 
         }
 
@@ -789,11 +789,11 @@
             recognition.stop();
             //location.reload();
         })
-//#endregion
+        //#endregion
 
 
         //#endregion
-       
+
         //#region r word list
         const rwordslvl1 = fetch('./r.json')
             .then((response) => response.json())
@@ -809,62 +809,120 @@
                 // }
                 //pick a random word
                 const word = jsondata2.words[Math.floor(Math.random() * jsondata2.words.length)];
-                   console.log(word);
+                console.log(word);
                 //change key word or phrase
                 document.getElementById('wordOrPhrase').innerText = word;
             });
         //#endregion
-       
-        //#region onresult
+
+        //#region onresult and key purpose
         recognition.onresult = function (event) {
             let current = event.resultIndex;
             let transcript = event.results[current][0].transcript;
             transcript = transcript.toLowerCase();
             // minor bug here, recognition  error when transcribing speechsynthesis
-            
+            //#region Rhetts key purpose
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            ////////////////////////////////////speech therapist///////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
             //#region if result is over certain confidence level enter into text area
             if (event.results[current][0].confidence > .6) {
                 document.querySelector("#rhett_listening").textContent = transcript;
-                const checkword = document.querySelector("#rhett_listening").textContent;
+                const checkword = transcript;
                 const correctword = document.getElementById('wordOrPhrase').textContent
-            //#region check if attempt is correct, if true move onto next word 
-                if(  checkword== correctword||checkword==' '+correctword ){
-                        console.log ('correct')
-                        document.getElementById('wordOrPhrase').style = 'color:green;'
-                        //#region get a new word
-                        const rwordslvl1 = fetch('./r.json')
+
+
+                //#region  if attempt correct move on to next word 
+                if (checkword == correctword || checkword == ' ' + correctword) {
+                    console.log('correct')
+                    document.getElementById('wordOrPhrase').style = 'color:green;'
+                    //#region have Rhett choose a response from following list
+                    const correctList = [
+                        "very good sir",
+                        "Nice work",
+                        "Well done master hawkins",
+                        "That is correct",
+                        "Very good...",
+                        "fantastic"
+
+                    ];
+
+                    const ThatWasCorrect = correctList[Math.floor(Math.random() * correctList.length)];
+
+                    readOut(ThatWasCorrect)
+                    //#endregion
+
+                    //#region get a new word
+                    const rwordslvl1 = fetch('./r.json')
                         .then((response) => response.json())
-                   
+
                         .then((json) => {
                             const jsondata = JSON.stringify(json);
                             const jsondata2 = JSON.parse(jsondata)
-                        
+
                             //#region pick a random word to check
                             //this is too random i need to iterate the list not just run a constant loop
                             const word = jsondata2.words[Math.floor(Math.random() * jsondata2.words.length)];
                             console.log(word);
                             //change key word or phrase
                             document.getElementById('wordOrPhrase').innerText = word;
-                        //#endregion
+                            document.getElementById('wordOrPhrase').style = 'color:white;'
+                            //#endregion
                         })
-                        //#endregion
-                    }
-                    else {
-                        console.log ('try again')
-                        document.getElementById('wordOrPhrase').style = 'color:red;'
-                    }
+                    //#endregion
+                }
+                //#endregion
+
+                //#region if attempt is incorrect try again
+                else {
+                    console.log('try again')
+                    document.getElementById('wordOrPhrase').style = 'color:red;'
+                    //#region rhett response to incorrect text
+                    const correctList = [
+                        "I'm sorry sir, that was incorrect",
+                        "please try again",
+                        "I might have miss heard you, could you please repeat that?",
+                        "Once more?",
+                        "Nice try master Hawkins, but that wasn't quite right",
+                        "could we try that one again please sir?"
+
+                    ];
+
+                    const ThatWasCorrect = correctList[Math.floor(Math.random() * correctList.length)];
+
+                    readOut(ThatWasCorrect)
+                    //#endregion
+                }
+                //#endregion
+
+                //#region reset attempt box
                 setTimeout(() => {
 
-                    document.querySelector("#rhett_listening").textContent =''
+                    document.querySelector("#rhett_listening").textContent = 'listening...'
 
                 }, 1000);
-             }
+                //#endregion
+            }
+
+
+            //#region attmpt confidence
             console.log("confidence" + event.results[current][0].confidence);
             console.log('I think you said: ' + transcript)
-         //#endregion
-       
+            //#endregion
 
-       //#endregion
+
+            //#endregion
+
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            ////////////////////////////////////end of speech therapist///////////////////////////////////////////////////////////////////////////
+            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            //#endregion
+
+
+
+
 
             //#region various commands outside of speech therapy operations
             if (localStorage.getItem("lang") === "en-US") {
@@ -902,35 +960,29 @@
                 if (transcript.includes("ears on")) {
                     readOut(earsOn);
                 }
-               
-                if (transcript.includes("hi")){
-                    if (replyhours < '12')
-                    {
+
+                if (transcript.includes("hi")) {
+                    if (replyhours < '12') {
                         readOut("good morning master Hawkins")
                     }
-                else if(replyhours > '12' && replyhours <'16')
-                    {
+                    else if (replyhours > '12' && replyhours < '16') {
                         readOut("good afternoon master hawkins")
-    
+
                     }
-                else
-                    {
+                    else {
                         readOut("good evening master hawkins ")
                     }
                 }
 
-                if (transcript.includes("hello")){
-                    if (replyhours < '12')
-                    {
+                if (transcript.includes("hello")) {
+                    if (replyhours < '12') {
                         readOut("good morning master Hawkins")
                     }
-                else if(replyhours > '12' && replyhours <'16')
-                    {
+                    else if (replyhours > '12' && replyhours < '16') {
                         readOut("good afternoon master hawkins")
-    
+
                     }
-                else
-                    {
+                    else {
                         readOut("good evening master hawkins ")
                     }
                 }
@@ -950,9 +1002,9 @@
                 if (transcript.includes("connection status")) {
                     readOut(`you are ${connectivity} sir`);
                 }
-          
-              
-              
+
+
+
 
 
 
@@ -1007,13 +1059,13 @@
 
             }
 
-//#endregion
+            //#endregion
 
 
         }
-//#endregion
- 
-//#endregion
+        //#endregion
+
+        //#endregion
 
         //#region speech synthesis
 
@@ -1035,8 +1087,8 @@
 
             // createMsg("jmsg", message);
         }
-//#endregion
-       
+        //#endregion
+
         //#region schedule
 
         // timer
@@ -1104,7 +1156,7 @@
             });
 
 
-//#endregion
+        //#endregion
 
         //#region searchbar
         const f = document.getElementById('form');
@@ -1123,8 +1175,8 @@
         f.addEventListener('submit', submitted);
 
         //#endregion
-        
-       
+
+
     </script>
 </body>
 
