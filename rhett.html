@@ -35,6 +35,12 @@
             align-items: center;
         }
 
+       #wordOrPhrase{
+            color: white;
+            position: fixed;
+            top: 25%;
+            left: 25%;
+        }
 
         button {
             color: black;
@@ -582,6 +588,7 @@
 
         <!-- <img src="./iron_man.gif" id="iron_man" /> -->
     </div>
+    
     <form id="form" class="searchform">
         <input id="query" name="q" placeholder="Search...">
         <button id="searchbox" type="button-btn">
@@ -592,7 +599,8 @@
             </svg>
         </button>
     </form>
-
+    <div class="requiredWordOrPhrase" id = "wordOrPhrase">continue</div>
+  
     <button id="start_rhett_btn" class="hide_on_small">
 
         <p>Start Recognition</p>
@@ -611,12 +619,21 @@
     <script>
 
        
-       //#region on load
+        //#region on load
         window.onload = () => {
-
             recognition.start()
+            //check level
+            const lvlcheck = localStorage.getItem("lvl")
+            if(!lvlcheck) {
+                localStorage.setItem("lvl", 'level1')
+                readOut('systems are now fully operational, lets get started')
+            }
+            else{
+                readOut('systems are now fully operational, shall we continue?')
+            }
+         
 
-            readOut('systems are now fully operational, lets get started')
+            
            
             //#region ui vars and elements
         const turn_on = document.querySelector("#turn_on");
@@ -701,14 +718,15 @@
 
         //#region speech recognition
 
-        // speech lang
+        //#region choose language
 
 
         if (localStorage.getItem("lang") === null) {
             localStorage.setItem("lang", "en-US")
         }
+        //#endregion
 
-
+        //#region start recognition
         const SpeechRecognition =
             window.SpeechRecognition || window.webkitSpeechRecognition;
 
@@ -727,7 +745,7 @@
             document.querySelector("#rhett_listening").style.display = "flex"
 
         };
-
+        let stopingR = false;
 
         recognition.onend = () => {
             if (stopingR === false) {
@@ -746,22 +764,109 @@
         const replydatetime = new Date();
         const replyhours = replydatetime.getHours()
         
+
+        //#region random phrase spoken when recognition running manually
+        const activeList = [
+            "my voice systems are now active",
+            "voice control activated",
+            "I am now capable of executing commands via voice control"
+        ];
+
+        const systemActive = activeList[Math.floor(Math.random() * activeList.length)];
+//#endregion
+        
+        //#region start/stop rhett with btn
+        document.querySelector("#start_rhett_btn").onclick = function () {
+            recognition.start();
+            readOut(systemActive)
+         
+
+        }
+
+
+        document.querySelector("#stop_rhett_btn").addEventListener("click", () => {
+            stopingR = true;
+            recognition.stop();
+            //location.reload();
+        })
+//#endregion
+
+
+        //#endregion
+       
+        //#region r word list
+        const rwordslvl1 = fetch('./r.json')
+            .then((response) => response.json())
+            //.then((json) => console.log(json))
+            .then((json) => {
+                const jsondata = JSON.stringify(json);
+                const jsondata2 = JSON.parse(jsondata)
+                //list all words in console
+                //let x = 0;
+                // for (x; x < jsondata2.words.length; x++) {
+                //     //console.log(jsondata2.schedule[x].date);
+                //    console.log("word:"+jsondata2.words[x])
+                // }
+                //pick a random word
+                const word = jsondata2.words[Math.floor(Math.random() * jsondata2.words.length)];
+                   console.log(word);
+                //change key word or phrase
+                document.getElementById('wordOrPhrase').innerText = word;
+            });
+        //#endregion
+       
+        //#region onresult
         recognition.onresult = function (event) {
             let current = event.resultIndex;
             let transcript = event.results[current][0].transcript;
             transcript = transcript.toLowerCase();
             // minor bug here, recognition  error when transcribing speechsynthesis
-            if (event.results[current][0].confidence > .9) {
-                document.querySelector("#rhett_listening").textContent = event.results[current][0].transcript;
-                //+ "confidence" + event.results[current][0].confidence;
-            }
+            
+            //#region if result is over certain confidence level enter into text area
+            if (event.results[current][0].confidence > .6) {
+                document.querySelector("#rhett_listening").textContent = transcript;
+                const checkword = document.querySelector("#rhett_listening").textContent;
+                const correctword = document.getElementById('wordOrPhrase').textContent
+            //#region check if attempt is correct, if true move onto next word 
+                if(  checkword== correctword||checkword==' '+correctword ){
+                        console.log ('correct')
+                        document.getElementById('wordOrPhrase').style = 'color:green;'
+                        //#region get a new word
+                        const rwordslvl1 = fetch('./r.json')
+                        .then((response) => response.json())
+                   
+                        .then((json) => {
+                            const jsondata = JSON.stringify(json);
+                            const jsondata2 = JSON.parse(jsondata)
+                        
+                            //#region pick a random word to check
+                            //this is too random i need to iterate the list not just run a constant loop
+                            const word = jsondata2.words[Math.floor(Math.random() * jsondata2.words.length)];
+                            console.log(word);
+                            //change key word or phrase
+                            document.getElementById('wordOrPhrase').innerText = word;
+                        //#endregion
+                        })
+                        //#endregion
+                    }
+                    else {
+                        console.log ('try again')
+                        document.getElementById('wordOrPhrase').style = 'color:red;'
+                    }
+                setTimeout(() => {
+
+                    document.querySelector("#rhett_listening").textContent =''
+
+                }, 1000);
+             }
             console.log("confidence" + event.results[current][0].confidence);
-            // createMsg("usermsg", transcript);
-         
-            // hi - hello
+            console.log('I think you said: ' + transcript)
+         //#endregion
+       
 
+       //#endregion
 
-
+            //#region various commands outside of speech therapy operations
             if (localStorage.getItem("lang") === "en-US") {
 
                 // if (Date.now() === '12:40 pm') {
@@ -902,36 +1007,12 @@
 
             }
 
-
+//#endregion
 
 
         }
-
-        const activeList = [
-            "my voice systems are now active",
-            "voice control activated",
-            "I am now capable of executing commands via voice control"
-        ];
-
-        const systemActive = activeList[Math.floor(Math.random() * activeList.length)];
-
-        // 
-        // start rhett with btn
-        document.querySelector("#start_rhett_btn").onclick = function () {
-            recognition.start();
-            readOut(systemActive)
-         
-
-        }
-
-
-        document.querySelector("#stop_rhett_btn").addEventListener("click", () => {
-            stopingR = true;
-            recognition.stop();
-            //location.reload();
-        })
-
-
+//#endregion
+ 
 //#endregion
 
         //#region speech synthesis

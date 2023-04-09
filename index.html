@@ -621,9 +621,16 @@ readOut('I am Rhett, your personal speech therapist')
 
 
         }
+const lvlcheck = localStorage.getItem("lvl")
+
         function nextScreen() {
             //window.open("rhett.html")
+            if(!lvlcheck || lvlcheck === 'level1'){
             window.location.href = '/rhett.html'
+            }
+            else{
+                window.location.href ='/error404.html'
+            }
             //this.window.close();
         };
 
