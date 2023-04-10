@@ -562,7 +562,7 @@
 
 <body>
     <!--#region html-->
-    <audio src="./power up.mp3" id="turn_on"></audio>
+
 
     <audio src="./newpowerup.mp3" id="loadsound"></audio>
 
@@ -632,11 +632,10 @@
                 readOut('systems are now fully operational, shall we continue?')
             }
 
-
-
+            console.log(localStorage.getItem('score'))
 
             //#region ui vars and elements
-            const turn_on = document.querySelector("#turn_on");
+
 
             const time = document.querySelector("#clocktime");
             const machine = document.querySelector(".machine");
@@ -794,25 +793,116 @@
 
         //#endregion
 
-        //#region r word list
-        const rwordslvl1 = fetch('./r.json')
-            .then((response) => response.json())
-            //.then((json) => console.log(json))
-            .then((json) => {
-                const jsondata = JSON.stringify(json);
-                const jsondata2 = JSON.parse(jsondata)
-                //list all words in console
-                //let x = 0;
-                // for (x; x < jsondata2.words.length; x++) {
-                //     //console.log(jsondata2.schedule[x].date);
-                //    console.log("word:"+jsondata2.words[x])
-                // }
-                //pick a random word
-                const word = jsondata2.words[Math.floor(Math.random() * jsondata2.words.length)];
-                console.log(word);
-                //change key word or phrase
-                document.getElementById('wordOrPhrase').innerText = word;
-            });
+        //#region initial word based on saved score (update as i progress)
+        const score = localStorage.getItem('score')
+        if (!score) {
+            localStorage.setItem('score', '0')
+        }
+        //#region less then 5
+        if (score <= 5) {
+            const rwordslvl1 = fetch('./letters/r/r.json')
+                .then((response) => response.json())
+
+                .then((json) => {
+                    const jsondata = JSON.stringify(json);
+                    const jsondata2 = JSON.parse(jsondata)
+
+                    //#region pick a random word to check
+                    //this is too random i need to iterate the list not just run a constant loop
+                    const word = jsondata2.words[Math.floor(Math.random() * jsondata2.words.length)];
+                    console.log(word);
+                    //change key word or phrase
+                    document.getElementById('wordOrPhrase').innerText = word;
+                    document.getElementById('wordOrPhrase').style = 'color:white;'
+                    //#endregion
+                })
+        }
+        //#endregion
+        //#region 6-10
+        else if (score > 5 && score <= 10) {
+            const rmiddlewordslvl1 = fetch('./letters/r/rmiddle.json')
+                .then((response) => response.json())
+
+                .then((json) => {
+                    const jsondata = JSON.stringify(json);
+                    const jsondata2 = JSON.parse(jsondata)
+
+                    //#region pick a random word to check
+                    //this is too random i need to iterate the list not just run a constant loop
+                    const word = jsondata2.words[Math.floor(Math.random() * jsondata2.words.length)];
+                    console.log(word);
+                    //change key word or phrase
+                    document.getElementById('wordOrPhrase').innerText = word;
+                    document.getElementById('wordOrPhrase').style = 'color:white;'
+                    //#endregion
+                })
+
+        }
+        //#endregion
+        //#region 10-15
+        else if (score > 10 && score <= 15) {
+            const rendwordslvl1 = fetch('./letters/r/rend.json')
+                .then((response) => response.json())
+
+                .then((json) => {
+                    const jsondata = JSON.stringify(json);
+                    const jsondata2 = JSON.parse(jsondata)
+
+                    //#region pick a random word to check
+                    //this is too random i need to iterate the list not just run a constant loop
+                    const word = jsondata2.words[Math.floor(Math.random() * jsondata2.words.length)];
+                    console.log(word);
+                    //change key word or phrase
+                    document.getElementById('wordOrPhrase').innerText = word;
+                    document.getElementById('wordOrPhrase').style = 'color:white;'
+                    //#endregion
+                })
+        }
+        //#endregion
+        //#region 15-20
+        else if (score > 15 && score <= 20) {
+            const sendwordslvl1 = fetch('./letters/s/s.json')
+                .then((response) => response.json())
+
+                .then((json) => {
+                    const jsondata = JSON.stringify(json);
+                    const jsondata2 = JSON.parse(jsondata)
+
+                    //#region pick a random word to check
+                    //this is too random i need to iterate the list not just run a constant loop
+                    const word = jsondata2.words[Math.floor(Math.random() * jsondata2.words.length)];
+                    console.log(word);
+                    //change key word or phrase
+                    document.getElementById('wordOrPhrase').innerText = word;
+                    document.getElementById('wordOrPhrase').style = 'color:white;'
+                    //#endregion
+
+                })
+        }
+        //#endregion
+        //#region 20-25
+        else if (score > 20 && score <= 25) {
+            const sendwordslvl1 = fetch('./letters/s/smiddle.json')
+                .then((response) => response.json())
+
+                .then((json) => {
+                    const jsondata = JSON.stringify(json);
+                    const jsondata2 = JSON.parse(jsondata)
+
+                    //#region pick a random word to check
+                    //this is too random i need to iterate the list not just run a constant loop
+                    const word = jsondata2.words[Math.floor(Math.random() * jsondata2.words.length)];
+                    console.log(word);
+                    //change key word or phrase
+                    document.getElementById('wordOrPhrase').innerText = word;
+                    document.getElementById('wordOrPhrase').style = 'color:white;'
+                    //#endregion
+                })
+        }
+        //#endregion
+
+
+
         //#endregion
 
         //#region onresult and key purpose
@@ -832,6 +922,10 @@
                 const checkword = transcript;
                 const correctword = document.getElementById('wordOrPhrase').textContent
 
+                const score = localStorage.getItem('score')
+                if (!score) {
+                    localStorage.setItem('score', '0')
+                }
 
                 //#region  if attempt correct move on to next word 
                 if (checkword == correctword || checkword == ' ' + correctword) {
@@ -853,23 +947,412 @@
                     readOut(ThatWasCorrect)
                     //#endregion
 
+                    //#region set new score
+                    if (score == '0') {
+                        localStorage.setItem('score', '1')
+                    }
+                    else if (score == '1') {
+                        localStorage.setItem('score', '2')
+                    }
+                    else if (score == '2') {
+                        localStorage.setItem('score', '3')
+                    }
+                    else if (score == '3') {
+                        localStorage.setItem('score', '4')
+                    }
+                    else if (score == '4') {
+                        localStorage.setItem('score', '5')
+                    }
+                    else if (score == '5') {
+                        localStorage.setItem('score', '6')
+                    }
+                    else if (score == '6') {
+                        localStorage.setItem('score', '7')
+                    }
+                    else if (score == '7') {
+                        localStorage.setItem('score', '8')
+                    }
+                    else if (score == '8') {
+                        localStorage.setItem('score', '9')
+                    }
+                    else if (score == '9') {
+                        localStorage.setItem('score', '10')
+                    }
+                    else if (score == '10') {
+                        localStorage.setItem('score', '11')
+                    }
+                    else if (score == '11') {
+                        localStorage.setItem('score', '12')
+                    }
+                    else if (score == '12') {
+                        localStorage.setItem('score', '13')
+                    }
+                    else if (score == '13') {
+                        localStorage.setItem('score', '14')
+                    }
+                    else if (score == '14') {
+                        localStorage.setItem('score', '15')
+                    }
+                    else if (score == '15') {
+                        localStorage.setItem('score', '16')
+                    }
+                    else if (score == '16') {
+                        localStorage.setItem('score', '17')
+                    }
+                    else if (score == '17') {
+                        localStorage.setItem('score', '18')
+                    }
+                    else if (score == '18') {
+                        localStorage.setItem('score', '19')
+                    }
+                    else if (score == '19') {
+                        localStorage.setItem('score', '20')
+                    }
+                    else if (score == '20') {
+                        localStorage.setItem('score', '21')
+                    }
+                    else if (score == '21') {
+                        localStorage.setItem('score', '22')
+                    }
+                    else if (score == '22') {
+                        localStorage.setItem('score', '23')
+                    }
+                    else if (score == '23') {
+                        localStorage.setItem('score', '24')
+                    }
+                    else if (score == '24') {
+                        localStorage.setItem('score', '25')
+                    }
+                    else if (score == '25') {
+                        localStorage.setItem('score', '26')
+                    }
+                    else if (score == '26') {
+                        localStorage.setItem('score', '27')
+                    }
+                    else if (score == '27') {
+                        localStorage.setItem('score', '28')
+                    }
+                    else if (score == '28') {
+                        localStorage.setItem('score', '29')
+                    }
+                    else if (score == '29') {
+                        localStorage.setItem('score', '30')
+                    }
+                    else if (score == '30') {
+                        localStorage.setItem('score', '31')
+                    }
+                    else if (score == '31') {
+                        localStorage.setItem('score', '32')
+                    }
+                    else if (score == '32') {
+                        localStorage.setItem('score', '33')
+                    }
+                    else if (score == '33') {
+                        localStorage.setItem('score', '34')
+                    }
+                    else if (score == '34') {
+                        localStorage.setItem('score', '35')
+                    }
+                    else if (score == '35') {
+                        localStorage.setItem('score', '36')
+                    }
+                    else if (score == '36') {
+                        localStorage.setItem('score', '37')
+                    }
+                    else if (score == '37') {
+                        localStorage.setItem('score', '38')
+                    }
+                    else if (score == '38') {
+                        localStorage.setItem('score', '39')
+                    }
+                    else if (score == '39') {
+                        localStorage.setItem('score', '40')
+                    }
+                    else if (score == '40') {
+                        localStorage.setItem('score', '41')
+                    }
+                    else if (score == '41') {
+                        localStorage.setItem('score', '42')
+                    }
+                    else if (score == '42') {
+                        localStorage.setItem('score', '43')
+                    }
+                    else if (score == '43') {
+                        localStorage.setItem('score', '44')
+                    }
+                    else if (score == '44') {
+                        localStorage.setItem('score', '45')
+                    }
+                    else if (score == '45') {
+                        localStorage.setItem('score', '46')
+                    }
+                    else if (score == '46') {
+                        localStorage.setItem('score', '47')
+                    }
+                    else if (score == '47') {
+                        localStorage.setItem('score', '48')
+                    }
+                    else if (score == '48') {
+                        localStorage.setItem('score', '49')
+                    }
+                    else if (score == '49') {
+                        localStorage.setItem('score', '50')
+                    }
+                    else if (score == '50') {
+                        localStorage.setItem('score', '51')
+                    }
+                    else if (score == '51') {
+                        localStorage.setItem('score', '52')
+                    }
+                    else if (score == '52') {
+                        localStorage.setItem('score', '53')
+                    }
+                    else if (score == '53') {
+                        localStorage.setItem('score', '54')
+                    }
+                    else if (score == '54') {
+                        localStorage.setItem('score', '55')
+                    }
+                    else if (score == '55') {
+                        localStorage.setItem('score', '56')
+                    }
+                    else if (score == '56') {
+                        localStorage.setItem('score', '57')
+                    }
+                    else if (score == '57') {
+                        localStorage.setItem('score', '58')
+                    }
+                    else if (score == '58') {
+                        localStorage.setItem('score', '59')
+                    }
+                    else if (score == '59') {
+                        localStorage.setItem('score', '60')
+                    }
+
+
+                    //#endregion
+                    console.log(score)
                     //#region get a new word
-                    const rwordslvl1 = fetch('./r.json')
-                        .then((response) => response.json())
+                    //#region below 5
+                    if (score <= 5) {
+                        const rwordslvl1 = fetch('./letters/r/r.json')
+                            .then((response) => response.json())
 
-                        .then((json) => {
-                            const jsondata = JSON.stringify(json);
-                            const jsondata2 = JSON.parse(jsondata)
+                            .then((json) => {
+                                const jsondata = JSON.stringify(json);
+                                const jsondata2 = JSON.parse(jsondata)
 
-                            //#region pick a random word to check
-                            //this is too random i need to iterate the list not just run a constant loop
-                            const word = jsondata2.words[Math.floor(Math.random() * jsondata2.words.length)];
-                            console.log(word);
-                            //change key word or phrase
-                            document.getElementById('wordOrPhrase').innerText = word;
-                            document.getElementById('wordOrPhrase').style = 'color:white;'
-                            //#endregion
-                        })
+                                //#region pick a random word to check
+                                //this is too random i need to iterate the list not just run a constant loop
+                                const word = jsondata2.words[Math.floor(Math.random() * jsondata2.words.length)];
+                                console.log(word);
+                                //change key word or phrase
+                                document.getElementById('wordOrPhrase').innerText = word;
+                                document.getElementById('wordOrPhrase').style = 'color:white;'
+                                //#endregion
+                            })
+                    }
+                    //#endregion
+                    //#region 6-10
+                    else if (score > 5 && score <= 10) {
+                        const rmiddlewordslvl1 = fetch('./letters/r/rmiddle.json')
+                            .then((response) => response.json())
+
+                            .then((json) => {
+                                const jsondata = JSON.stringify(json);
+                                const jsondata2 = JSON.parse(jsondata)
+
+                                //#region pick a random word to check
+                                //this is too random i need to iterate the list not just run a constant loop
+                                const word = jsondata2.words[Math.floor(Math.random() * jsondata2.words.length)];
+                                console.log(word);
+                                //change key word or phrase
+                                document.getElementById('wordOrPhrase').innerText = word;
+                                document.getElementById('wordOrPhrase').style = 'color:white;'
+                                //#endregion
+                            })
+
+                    }
+                    //#endregion
+                    //#region 10-15
+                    else if (score > 10 && score <= 15) {
+                        const rendwordslvl1 = fetch('./letters/r/rend.json')
+                            .then((response) => response.json())
+
+                            .then((json) => {
+                                const jsondata = JSON.stringify(json);
+                                const jsondata2 = JSON.parse(jsondata)
+
+                                //#region pick a random word to check
+                                //this is too random i need to iterate the list not just run a constant loop
+                                const word = jsondata2.words[Math.floor(Math.random() * jsondata2.words.length)];
+                                console.log(word);
+                                //change key word or phrase
+                                document.getElementById('wordOrPhrase').innerText = word;
+                                document.getElementById('wordOrPhrase').style = 'color:white;'
+                                //#endregion
+                            })
+                    }
+                    //#endregion
+                    //#region 15-20
+                    else if (score > 15 && score <= 20) {
+                        const swordslvl1 = fetch('./letters/s/s.json')
+                            .then((response) => response.json())
+
+                            .then((json) => {
+                                const jsondata = JSON.stringify(json);
+                                const jsondata2 = JSON.parse(jsondata)
+
+                                //#region pick a random word to check
+                                //this is too random i need to iterate the list not just run a constant loop
+                                const word = jsondata2.words[Math.floor(Math.random() * jsondata2.words.length)];
+                                console.log(word);
+                                //change key word or phrase
+                                document.getElementById('wordOrPhrase').innerText = word;
+                                document.getElementById('wordOrPhrase').style = 'color:white;'
+                                //#endregion
+                            })
+                    }
+                    //#endregion
+                    //#region 20-25
+                    else if (score > 20 && score <= 25) {
+                        const smiddlewordslvl1 = fetch('./letters/s/smiddle.json')
+                            .then((response) => response.json())
+
+                            .then((json) => {
+                                const jsondata = JSON.stringify(json);
+                                const jsondata2 = JSON.parse(jsondata)
+
+                                //#region pick a random word to check
+                                //this is too random i need to iterate the list not just run a constant loop
+                                const word = jsondata2.words[Math.floor(Math.random() * jsondata2.words.length)];
+                                console.log(word);
+                                //change key word or phrase
+                                document.getElementById('wordOrPhrase').innerText = word;
+                                document.getElementById('wordOrPhrase').style = 'color:white;'
+                                //#endregion
+                            })
+                    }
+                    //#endregion
+                    //#region 25-30
+                    else if (score > 25 && score <= 30) {
+                        const sendwordslvl1 = fetch('./letters/s/send.json')
+                            .then((response) => response.json())
+
+                            .then((json) => {
+                                const jsondata = JSON.stringify(json);
+                                const jsondata2 = JSON.parse(jsondata)
+
+                                //#region pick a random word to check
+                                //this is too random i need to iterate the list not just run a constant loop
+                                const word = jsondata2.words[Math.floor(Math.random() * jsondata2.words.length)];
+                                console.log(word);
+                                //change key word or phrase
+                                document.getElementById('wordOrPhrase').innerText = word;
+                                document.getElementById('wordOrPhrase').style = 'color:white;'
+                                //#endregion
+                            })
+                    }
+                    //#endregion
+                    //#region 30-35
+                    else if (score > 30 && score <= 35) {
+                        const sendwordslvl1 = fetch('./letters/th/th.json')
+                            .then((response) => response.json())
+
+                            .then((json) => {
+                                const jsondata = JSON.stringify(json);
+                                const jsondata2 = JSON.parse(jsondata)
+
+                                //#region pick a random word to check
+                                //this is too random i need to iterate the list not just run a constant loop
+                                const word = jsondata2.words[Math.floor(Math.random() * jsondata2.words.length)];
+                                console.log(word);
+                                //change key word or phrase
+                                document.getElementById('wordOrPhrase').innerText = word;
+                                document.getElementById('wordOrPhrase').style = 'color:white;'
+                                //#endregion
+                            })
+                    }
+                    //#endregion
+                    //#region 35-40
+                    else if (score > 35 && score <= 40) {
+                        const thwordslvl1 = fetch('./letters/th/thmiddle.json')
+                            .then((response) => response.json())
+
+                            .then((json) => {
+                                const jsondata = JSON.stringify(json);
+                                const jsondata2 = JSON.parse(jsondata)
+
+                                //#region pick a random word to check
+                                //this is too random i need to iterate the list not just run a constant loop
+                                const word = jsondata2.words[Math.floor(Math.random() * jsondata2.words.length)];
+                                console.log(word);
+                                //change key word or phrase
+                                document.getElementById('wordOrPhrase').innerText = word;
+                                document.getElementById('wordOrPhrase').style = 'color:white;'
+                                //#endregion
+                            })
+                    }
+                    //#endregion
+                    //#region 40-45
+                    else if (score > 40 && score <= 45) {
+                        const thmiddlewordslvl1 = fetch('./letters/th/thend.json')
+                            .then((response) => response.json())
+
+                            .then((json) => {
+                                const jsondata = JSON.stringify(json);
+                                const jsondata2 = JSON.parse(jsondata)
+
+                                //#region pick a random word to check
+                                //this is too random i need to iterate the list not just run a constant loop
+                                const word = jsondata2.words[Math.floor(Math.random() * jsondata2.words.length)];
+                                console.log(word);
+                                //change key word or phrase
+                                document.getElementById('wordOrPhrase').innerText = word;
+                                document.getElementById('wordOrPhrase').style = 'color:white;'
+                                //#endregion
+                            })
+                    }
+                    //#endregion
+                    //#region 45-50
+                    else if (score > 45 && score <= 50) {
+                        const thendwordslvl1 = fetch('./letters/th/thend.json')
+                            .then((response) => response.json())
+
+                            .then((json) => {
+                                const jsondata = JSON.stringify(json);
+                                const jsondata2 = JSON.parse(jsondata)
+
+                                //#region pick a random word to check
+                                //this is too random i need to iterate the list not just run a constant loop
+                                const word = jsondata2.words[Math.floor(Math.random() * jsondata2.words.length)];
+                                console.log(word);
+                                //change key word or phrase
+                                document.getElementById('wordOrPhrase').innerText = word;
+                                document.getElementById('wordOrPhrase').style = 'color:white;'
+                                //#endregion
+                            })
+                    }
+                    //#endregion
+                    //#region 50-55
+                    else if (score > 50 && score <= 55) {
+                        const lwordslvl1 = fetch('./letters/l/l.json')
+                            .then((response) => response.json())
+
+                            .then((json) => {
+                                const jsondata = JSON.stringify(json);
+                                const jsondata2 = JSON.parse(jsondata)
+
+                                //#region pick a random word to check
+                                //this is too random i need to iterate the list not just run a constant loop
+                                const word = jsondata2.words[Math.floor(Math.random() * jsondata2.words.length)];
+                                console.log(word);
+                                //change key word or phrase
+                                document.getElementById('wordOrPhrase').innerText = word;
+                                document.getElementById('wordOrPhrase').style = 'color:white;'
+                                //#endregion
+                            })
+                    }
                     //#endregion
                 }
                 //#endregion
