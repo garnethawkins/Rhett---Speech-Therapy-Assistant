@@ -632,7 +632,7 @@
                 readOut('systems are now fully operational, shall we continue?')
             }
 
-            console.log(localStorage.getItem('score'))
+            //console.log(localStorage.getItem('score'))
 
             //#region ui vars and elements
 
@@ -687,7 +687,7 @@
 
 
             const memory = navigator.deviceMemory
-            console.log("apparent memory: " + memory)
+            //console.log("apparent memory: " + memory)
             const alerted = false;
             function printBatteryStatus(batteryObject) {
                 document.querySelector("#battery").textContent = `${(batteryObject.level * 100).toFixed(0)
@@ -738,7 +738,7 @@
 
 
         recognition.onstart = function () {
-            console.log("voice recognition activated");
+            //console.log("voice recognition activated");
             document.querySelector("#stop_rhett_btn").style.display = "flex"
             document.querySelector("#start_rhett_btn").style.display = "none"
             document.querySelector("#rhett_listening").style.display = "flex"
@@ -810,7 +810,7 @@
                     //#region pick a random word to check
                     //this is too random i need to iterate the list not just run a constant loop
                     const word = jsondata2.words[Math.floor(Math.random() * jsondata2.words.length)];
-                    console.log(word);
+                    //console.log(word);
                     //change key word or phrase
                     document.getElementById('wordOrPhrase').innerText = word;
                     document.getElementById('wordOrPhrase').style = 'color:white;'
@@ -830,7 +830,7 @@
                     //#region pick a random word to check
                     //this is too random i need to iterate the list not just run a constant loop
                     const word = jsondata2.words[Math.floor(Math.random() * jsondata2.words.length)];
-                    console.log(word);
+                    //console.log(word);
                     //change key word or phrase
                     document.getElementById('wordOrPhrase').innerText = word;
                     document.getElementById('wordOrPhrase').style = 'color:white;'
@@ -851,7 +851,7 @@
                     //#region pick a random word to check
                     //this is too random i need to iterate the list not just run a constant loop
                     const word = jsondata2.words[Math.floor(Math.random() * jsondata2.words.length)];
-                    console.log(word);
+                    //console.log(word);
                     //change key word or phrase
                     document.getElementById('wordOrPhrase').innerText = word;
                     document.getElementById('wordOrPhrase').style = 'color:white;'
@@ -871,7 +871,7 @@
                     //#region pick a random word to check
                     //this is too random i need to iterate the list not just run a constant loop
                     const word = jsondata2.words[Math.floor(Math.random() * jsondata2.words.length)];
-                    console.log(word);
+                    //console.log(word);
                     //change key word or phrase
                     document.getElementById('wordOrPhrase').innerText = word;
                     document.getElementById('wordOrPhrase').style = 'color:white;'
@@ -892,7 +892,7 @@
                     //#region pick a random word to check
                     //this is too random i need to iterate the list not just run a constant loop
                     const word = jsondata2.words[Math.floor(Math.random() * jsondata2.words.length)];
-                    console.log(word);
+                    //console.log(word);
                     //change key word or phrase
                     document.getElementById('wordOrPhrase').innerText = word;
                     document.getElementById('wordOrPhrase').style = 'color:white;'
@@ -900,7 +900,126 @@
                 })
         }
         //#endregion
+        //#region 25-30
+        else if (score > 25 && score <= 30) {
+            const sendwordslvl1 = fetch('./letters/s/send.json')
+                .then((response) => response.json())
 
+                .then((json) => {
+                    const jsondata = JSON.stringify(json);
+                    const jsondata2 = JSON.parse(jsondata)
+
+                    //#region pick a random word to check
+                    //this is too random i need to iterate the list not just run a constant loop
+                    const word = jsondata2.words[Math.floor(Math.random() * jsondata2.words.length)];
+                    //console.log(word);
+                    //change key word or phrase
+                    document.getElementById('wordOrPhrase').innerText = word;
+                    document.getElementById('wordOrPhrase').style = 'color:white;'
+                    //#endregion
+                })
+        }
+        //#endregion
+        //#region 30-35
+        else if (score > 30 && score <= 35) {
+            const sendwordslvl1 = fetch('./letters/th/th.json')
+                .then((response) => response.json())
+
+                .then((json) => {
+                    const jsondata = JSON.stringify(json);
+                    const jsondata2 = JSON.parse(jsondata)
+
+                    //#region pick a random word to check
+                    //this is too random i need to iterate the list not just run a constant loop
+                    const word = jsondata2.words[Math.floor(Math.random() * jsondata2.words.length)];
+                    //console.log(word);
+                    //change key word or phrase
+                    document.getElementById('wordOrPhrase').innerText = word;
+                    document.getElementById('wordOrPhrase').style = 'color:white;'
+                    //#endregion
+                })
+        }
+        //#endregion
+        //#region 35-40
+        else if (score > 35 && score <= 40) {
+            const thwordslvl1 = fetch('./letters/th/thmiddle.json')
+                .then((response) => response.json())
+
+                .then((json) => {
+                    const jsondata = JSON.stringify(json);
+                    const jsondata2 = JSON.parse(jsondata)
+
+                    //#region pick a random word to check
+                    //this is too random i need to iterate the list not just run a constant loop
+                    const word = jsondata2.words[Math.floor(Math.random() * jsondata2.words.length)];
+                    //console.log(word);
+                    //change key word or phrase
+                    document.getElementById('wordOrPhrase').innerText = word;
+                    document.getElementById('wordOrPhrase').style = 'color:white;'
+                    //#endregion
+                })
+        }
+        //#endregion
+        //#region 40-45
+        else if (score > 40 && score <= 45) {
+            const thmiddlewordslvl1 = fetch('./letters/th/thend.json')
+                .then((response) => response.json())
+
+                .then((json) => {
+                    const jsondata = JSON.stringify(json);
+                    const jsondata2 = JSON.parse(jsondata)
+
+                    //#region pick a random word to check
+                    //this is too random i need to iterate the list not just run a constant loop
+                    const word = jsondata2.words[Math.floor(Math.random() * jsondata2.words.length)];
+                    //console.log(word);
+                    //change key word or phrase
+                    document.getElementById('wordOrPhrase').innerText = word;
+                    document.getElementById('wordOrPhrase').style = 'color:white;'
+                    //#endregion
+                })
+        }
+        //#endregion
+        //#region 45-50
+        else if (score > 45 && score <= 50) {
+            const thendwordslvl1 = fetch('./letters/th/thend.json')
+                .then((response) => response.json())
+
+                .then((json) => {
+                    const jsondata = JSON.stringify(json);
+                    const jsondata2 = JSON.parse(jsondata)
+
+                    //#region pick a random word to check
+                    //this is too random i need to iterate the list not just run a constant loop
+                    const word = jsondata2.words[Math.floor(Math.random() * jsondata2.words.length)];
+                    //console.log(word);
+                    //change key word or phrase
+                    document.getElementById('wordOrPhrase').innerText = word;
+                    document.getElementById('wordOrPhrase').style = 'color:white;'
+                    //#endregion
+                })
+        }
+        //#endregion
+        //#region 50-55
+        else if (score > 50 && score <= 55) {
+            const lwordslvl1 = fetch('./letters/l/l.json')
+                .then((response) => response.json())
+
+                .then((json) => {
+                    const jsondata = JSON.stringify(json);
+                    const jsondata2 = JSON.parse(jsondata)
+
+                    //#region pick a random word to check
+                    //this is too random i need to iterate the list not just run a constant loop
+                    const word = jsondata2.words[Math.floor(Math.random() * jsondata2.words.length)];
+                    //console.log(word);
+                    //change key word or phrase
+                    document.getElementById('wordOrPhrase').innerText = word;
+                    document.getElementById('wordOrPhrase').style = 'color:white;'
+                    //#endregion
+                })
+        }
+        //#endregion
 
 
         //#endregion
@@ -929,7 +1048,7 @@
 
                 //#region  if attempt correct move on to next word 
                 if (checkword == correctword || checkword == ' ' + correctword) {
-                    console.log('correct')
+                    //console.log('correct')
                     document.getElementById('wordOrPhrase').style = 'color:green;'
                     //#region have Rhett choose a response from following list
                     const correctList = [
@@ -1131,7 +1250,7 @@
 
 
                     //#endregion
-                    console.log(score)
+                    //console.log(score)
                     //#region get a new word
                     //#region below 5
                     if (score <= 5) {
@@ -1145,7 +1264,7 @@
                                 //#region pick a random word to check
                                 //this is too random i need to iterate the list not just run a constant loop
                                 const word = jsondata2.words[Math.floor(Math.random() * jsondata2.words.length)];
-                                console.log(word);
+                                //console.log(word);
                                 //change key word or phrase
                                 document.getElementById('wordOrPhrase').innerText = word;
                                 document.getElementById('wordOrPhrase').style = 'color:white;'
@@ -1165,7 +1284,7 @@
                                 //#region pick a random word to check
                                 //this is too random i need to iterate the list not just run a constant loop
                                 const word = jsondata2.words[Math.floor(Math.random() * jsondata2.words.length)];
-                                console.log(word);
+                                //console.log(word);
                                 //change key word or phrase
                                 document.getElementById('wordOrPhrase').innerText = word;
                                 document.getElementById('wordOrPhrase').style = 'color:white;'
@@ -1186,7 +1305,7 @@
                                 //#region pick a random word to check
                                 //this is too random i need to iterate the list not just run a constant loop
                                 const word = jsondata2.words[Math.floor(Math.random() * jsondata2.words.length)];
-                                console.log(word);
+                                //console.log(word);
                                 //change key word or phrase
                                 document.getElementById('wordOrPhrase').innerText = word;
                                 document.getElementById('wordOrPhrase').style = 'color:white;'
@@ -1206,7 +1325,7 @@
                                 //#region pick a random word to check
                                 //this is too random i need to iterate the list not just run a constant loop
                                 const word = jsondata2.words[Math.floor(Math.random() * jsondata2.words.length)];
-                                console.log(word);
+                                //console.log(word);
                                 //change key word or phrase
                                 document.getElementById('wordOrPhrase').innerText = word;
                                 document.getElementById('wordOrPhrase').style = 'color:white;'
@@ -1226,7 +1345,7 @@
                                 //#region pick a random word to check
                                 //this is too random i need to iterate the list not just run a constant loop
                                 const word = jsondata2.words[Math.floor(Math.random() * jsondata2.words.length)];
-                                console.log(word);
+                                //console.log(word);
                                 //change key word or phrase
                                 document.getElementById('wordOrPhrase').innerText = word;
                                 document.getElementById('wordOrPhrase').style = 'color:white;'
@@ -1246,7 +1365,7 @@
                                 //#region pick a random word to check
                                 //this is too random i need to iterate the list not just run a constant loop
                                 const word = jsondata2.words[Math.floor(Math.random() * jsondata2.words.length)];
-                                console.log(word);
+                                //console.log(word);
                                 //change key word or phrase
                                 document.getElementById('wordOrPhrase').innerText = word;
                                 document.getElementById('wordOrPhrase').style = 'color:white;'
@@ -1266,7 +1385,7 @@
                                 //#region pick a random word to check
                                 //this is too random i need to iterate the list not just run a constant loop
                                 const word = jsondata2.words[Math.floor(Math.random() * jsondata2.words.length)];
-                                console.log(word);
+                                //console.log(word);
                                 //change key word or phrase
                                 document.getElementById('wordOrPhrase').innerText = word;
                                 document.getElementById('wordOrPhrase').style = 'color:white;'
@@ -1286,7 +1405,7 @@
                                 //#region pick a random word to check
                                 //this is too random i need to iterate the list not just run a constant loop
                                 const word = jsondata2.words[Math.floor(Math.random() * jsondata2.words.length)];
-                                console.log(word);
+                                //console.log(word);
                                 //change key word or phrase
                                 document.getElementById('wordOrPhrase').innerText = word;
                                 document.getElementById('wordOrPhrase').style = 'color:white;'
@@ -1306,7 +1425,7 @@
                                 //#region pick a random word to check
                                 //this is too random i need to iterate the list not just run a constant loop
                                 const word = jsondata2.words[Math.floor(Math.random() * jsondata2.words.length)];
-                                console.log(word);
+                                //console.log(word);
                                 //change key word or phrase
                                 document.getElementById('wordOrPhrase').innerText = word;
                                 document.getElementById('wordOrPhrase').style = 'color:white;'
@@ -1326,7 +1445,7 @@
                                 //#region pick a random word to check
                                 //this is too random i need to iterate the list not just run a constant loop
                                 const word = jsondata2.words[Math.floor(Math.random() * jsondata2.words.length)];
-                                console.log(word);
+                                //console.log(word);
                                 //change key word or phrase
                                 document.getElementById('wordOrPhrase').innerText = word;
                                 document.getElementById('wordOrPhrase').style = 'color:white;'
@@ -1346,7 +1465,7 @@
                                 //#region pick a random word to check
                                 //this is too random i need to iterate the list not just run a constant loop
                                 const word = jsondata2.words[Math.floor(Math.random() * jsondata2.words.length)];
-                                console.log(word);
+                                //console.log(word);
                                 //change key word or phrase
                                 document.getElementById('wordOrPhrase').innerText = word;
                                 document.getElementById('wordOrPhrase').style = 'color:white;'
@@ -1359,7 +1478,7 @@
 
                 //#region if attempt is incorrect try again
                 else {
-                    console.log('try again')
+                    //console.log('try again')
                     document.getElementById('wordOrPhrase').style = 'color:red;'
                     //#region rhett response to incorrect text
                     const correctList = [
@@ -1389,9 +1508,9 @@
             }
 
 
-            //#region attmpt confidence
-            console.log("confidence" + event.results[current][0].confidence);
-            console.log('I think you said: ' + transcript)
+            //#region attempt confidence
+            //console.log("confidence" + event.results[current][0].confidence);
+            //console.log('I think you said: ' + transcript)
             //#endregion
 
 
@@ -1565,7 +1684,7 @@
             speech.text = message;
             speech.volume = 1;
             window.speechSynthesis.speak(speech);
-            console.log("reading out");
+            //console.log("reading out");
 
 
             // createMsg("jmsg", message);
@@ -1607,19 +1726,19 @@
         if (mm < 10) mm = '0' + mm;
 
         const formattedToday = dd + '/' + mm + '/' + yyyy;
-        console.log(formattedToday)
+        //console.log(formattedToday)
 
         //check schedule
         const jsondatacall = fetch('./data.json')
             .then((response) => response.json())
-            //.then((json) => console.log(json))
+            //.then((json) => //console.log(json))
             .then((json) => {
                 const jsondata = JSON.stringify(json);
                 const jsondata2 = JSON.parse(jsondata)
                 let x = 0;
 
                 for (x; x < jsondata2.schedule.length; x++) {
-                    //console.log(jsondata2.schedule[x].date);
+                    ////console.log(jsondata2.schedule[x].date);
                     if (jsondata2.schedule[x].date === formattedToday) {
 
                         //readOut('systems are now fully operational')

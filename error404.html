@@ -1,12 +1,629 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        body {
+
+            font: 1.6rem Helvetica, Arial;
+            margin: 0;
+            /* background: #000; */
+            background-color: #000;
+
+
+        }
+
+        .landing-screen {
+            background-color: #000;
+
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+            width: 100vw;
+            height: 100vh;
+            background-image: url('background.png');
+        }
+
+        .st0 {
+            font-family: 'FootlightMTLight';
+        }
+
+        .st1 {
+            font-size: 83.0285px;
+        }
+
+        .st2 {
+            fill: gray;
+        }
+
+        path#XMLID_5_ {
+
+            fill: #a40000;
+            filter: url(#blurFilter4);
+        }
+
+        path#XMLID_11_,
+        path#XMLID_2_ {
+            fill: #a40000;
+        }
+
+        .circle {
+            animation: out 2s infinite ease-out;
+            fill: #a40000;
+        }
+
+        .container404 {
+            text-align: center;
+            top: 70%
+        }
+
+        .message {
+            color: #a40000;
+        }
+
+        .message:after {
+            content: "]";
+        }
+
+        .message:before {
+            content: "[";
+        }
+
+        .message:after,
+        .message:before {
+
+            color: #FF9705;
+            font-size: 20px;
+            font-weight: bold;
+            -webkit-animation-name: opacity;
+            -webkit-animation-duration: .5s;
+            -webkit-animation-iteration-count: infinite;
+            -webkit-animation-name: opacity;
+            animation-name: opacity;
+            -webkit-animation-duration: .5s;
+            animation-duration: .5s;
+            -webkit-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+            margin: 0 50px;
+        }
+
+        @-webkit-keyframes opacity {
+
+            0%,
+            100% {
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes opacity {
+
+            0%,
+            100% {
+                opacity: 0;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes out {
+            0% {
+                r: 1;
+                opacity: 0.9;
+            }
+
+            25% {
+                r: 5;
+                opacity: 0.3;
+            }
+
+            50% {
+                r: 10;
+                opacity: 0.2;
+            }
+
+            75% {
+                r: 15;
+                opacity: 0.1;
+            }
+
+            100% {
+                r: 20;
+                opacity: 0;
+            }
+        }
+
+        .extended-welcome-circles,
+        .trans-lines-holder {
+            width: 200px;
+            height: 200px;
+            position: absolute;
+            top: 13.75%;
+            left: 43.6%;
+
+        }
+
+        .cla-1 {
+            color: #00a4a2;
+            stroke-dasharray: 3000;
+            opacity: 0.3;
+            animation: scifi-1-inf 20s infinite linear;
+        }
+
+        .cla-2 {
+            stroke-dasharray: 0;
+            opacity: 0;
+            animation: scifi-2-inf 15s infinite linear;
+        }
+
+        .cla-3 {
+            stroke-dasharray: 13000;
+            animation: scifi-3-inf 5s infinite linear;
+        }
+
+        .cla-4 {
+            stroke-dasharray: 200;
+            animation: scifi-4-inf 5s infinite linear;
+            color: #00a4a2;
+        }
+
+
+
+        .trans-lines-holder {
+            animation: rotate360 240s infinite linear;
+        }
+
+        .cla-4:nth-child(41),
+        .cla-4:nth-child(42),
+        .cla-4:nth-child(43),
+        .cla-4:nth-child(44),
+        .cla-4:nth-child(45),
+        .cla-4:nth-child(46),
+        .cla-4:nth-child(47),
+        .cla-4:nth-child(48),
+        .cla-4:nth-child(49),
+        .cla-4:nth-child(50),
+        .cla-4:nth-child(51),
+        .cla-4:nth-child(52),
+        .cla-4:nth-child(53),
+        .cla-4:nth-child(54),
+        .cla-4:nth-child(55),
+        .cla-4:nth-child(56),
+        .cla-4:nth-child(57),
+        .cla-4:nth-child(58),
+        .cla-4:nth-child(59),
+        .cla-4:nth-child(60),
+        .cla-4:nth-child(85),
+        .cla-4:nth-child(86),
+        .cla-4:nth-child(87),
+        .cla-4:nth-child(88),
+        .cla-4:nth-child(89),
+        .cla-4:nth-child(90),
+        .cla-4:nth-child(1),
+        .cla-4:nth-child(2),
+        .cla-4:nth-child(3),
+        .cla-4:nth-child(4),
+        .cla-4:nth-child(5),
+        .cla-4:nth-child(6),
+        .cla-4:nth-child(7),
+        .cla-4:nth-child(8),
+        .cla-4:nth-child(9),
+        .cla-4:nth-child(10),
+        .cla-4:nth-child(11),
+        .cla-4:nth-child(12),
+        .cla-4:nth-child(13),
+        .cla-4:nth-child(14),
+        .cla-4:nth-child(15) {
+            visibility: hidden;
+        }
+
+
+        @keyframes scifi-1-inf {
+            0% {
+                stroke-dashoffset: 3000;
+            }
+
+            10% {
+                stroke-dashoffset: 1000;
+            }
+
+            20% {
+                stroke-dashoffset: 2000;
+            }
+
+            30% {
+                stroke-dashoffset: 0;
+            }
+
+            50% {
+                stroke-dashoffset: -5000;
+            }
+
+            70% {
+                stroke-dashoffset: 0;
+            }
+
+            100% {
+                stroke-dashoffset: 3000;
+            }
+        }
+
+        @keyframes scifi-2-inf {
+            0% {
+                stroke-dasharray: 1500;
+                stroke-dashoffset: 2000;
+                opacity: 0.6;
+            }
+
+            10% {
+                stroke-dasharray: 1500;
+                stroke-dashoffset: 1800;
+                opacity: 0.6;
+            }
+
+            11% {
+                opacity: 0
+            }
+
+            19% {
+                opacity: 0
+            }
+
+            20% {
+                stroke-dasharray: 2500;
+                stroke-dashoffset: 2000;
+                opacity: 0.6;
+            }
+
+            25% {
+                stroke-dasharray: 1500;
+                stroke-dashoffset: 2000;
+                opacity: 1;
+            }
+
+            26% {
+                opacity: 0
+            }
+
+            34% {
+                opacity: 0
+            }
+
+            35% {
+                stroke-dasharray: 2000;
+                stroke-dashoffset: 2000;
+                opacity: 0.6;
+            }
+
+            44% {
+                stroke-dasharray: 1500;
+                stroke-dashoffset: 2000;
+                opacity: 0.6;
+            }
+
+            45% {
+                stroke-dasharray: 1500;
+                stroke-dashoffset: 2000;
+                opacity: 0
+            }
+
+            46% {
+                opacity: 0
+            }
+
+            55% {
+                stroke-dasharray: 1100;
+                stroke-dashoffset: 2500;
+                opacity: 0.6;
+            }
+
+            59% {
+                opacity: 1
+            }
+
+            60% {
+                stroke-dasharray: 1100;
+                stroke-dashoffset: 2500;
+                opacity: 0
+            }
+
+            69% {
+                opacity: 0
+            }
+
+            70% {
+                stroke-dasharray: 1500;
+                stroke-dashoffset: 2500;
+                opacity: 0.6;
+            }
+
+            79% {
+                stroke-dasharray: 1500;
+                stroke-dashoffset: 2500;
+                opacity: 0;
+            }
+
+            80% {
+                opacity: 0
+            }
+
+            81% {
+                stroke-dasharray: 1200;
+                stroke-dashoffset: 1600;
+                opacity: 0.6;
+            }
+
+            89% {
+                stroke-dasharray: 1200;
+                stroke-dashoffset: 1600;
+                opacity: 1;
+            }
+
+            90% {
+                opacity: 0
+            }
+
+            91% {
+                stroke-dasharray: 1200;
+                stroke-dashoffset: 1600;
+                opacity: 0.6;
+            }
+
+            99% {
+                stroke-dasharray: 1200;
+                stroke-dashoffset: 1600;
+                opacity: 0.6;
+            }
+
+            100% {
+                stroke-dasharray: 1200;
+                stroke-dashoffset: 1600;
+                opacity: 0;
+            }
+        }
+
+
+        @keyframes scifi-3-inf {
+            0% {
+                stroke-dashoffset: 13000;
+            }
+
+            100% {
+                stroke-dashoffset: -13000;
+            }
+        }
+
+        @keyframes rotate360 {
+            from {
+                transform: rotate(0deg)
+            }
+
+            to {
+                transform: rotate(360deg)
+            }
+        }
+
+        @keyframes scifi-4-inf {
+            from {
+                stroke-dashoffset: 0
+            }
+
+            50% {
+                stroke-dashoffset: 100
+            }
+
+            to {
+                stroke-dashoffset: 0
+            }
+        }
+    </style>
 </head>
+
 <body>
-    <h1>error</h1>
+    <div class="landing-screen">
+        <div class="container404">
+
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+                y="0px" viewBox="0 0 200 82.7" style="enable-background:new 0 0 200 82.7; width: 500px;
+        height: 400px;
+        text-align: center;
+        fill: #FF9705;
+        top: 70%" xml:space="preserve">
+
+                <g id="Calque_1">
+                    <text id="XMLID_3_" transform="matrix(1.2187 0 0 1 13 75.6393)" class="st0 st1">4</text>
+                    <text id="XMLID_4_" transform="matrix(1.2187 0 0 1 133.0003 73.6393)" class="st0 st1">4</text>
+                </g>
+                <g id="Calque_2">
+                    <g>
+                        <path id="XMLID_11_" d="M81.8,29.2c4.1-5.7,10.7-9.4,18.3-9.4c6.3,0,12.1,2.7,16.1,6.9c0.6-0.4,1.1-0.7,1.7-1.1
+           c-4.4-4.8-10.8-7.9-17.8-7.9c-8.3,0-15.6,4.2-20,10.6C80.7,28.5,81.3,28.8,81.8,29.2z" />
+                        <path id="XMLID_2_" d="M118.1,53.7c-4,5.7-10.7,9.5-18.2,9.5c-6.3,0-12.1-2.6-16.2-6.8c-0.6,0.4-1.1,0.7-1.7,1.1
+           c4.4,4.8,10.8,7.8,17.9,7.8c8.3,0,15.6-4.3,19.9-10.7C119.2,54.5,118.6,54.1,118.1,53.7z" />
+                        <animateTransform attributeName="transform" type="rotate" from="360 100 41.3" to="0 100 41.3"
+                            dur="10s" repeatCount="indefinite" />
+                    </g>
+                    <g id="XMLID_6_">
+                        <g id="XMLID_18_">
+
+
+
+                            <circle class="circle" cx="100" cy="41" r="1"></circle>
+                        </g>
+                    </g>
+                    <defs>
+                        <filter id="blurFilter4" x="-20" y="-20" width="200" height="200">
+                            <feGaussianBlur in="SourceGraphic" stdDeviation="2" />
+                        </filter>
+                    </defs>
+                    <path id="XMLID_5_" class="st2" d="M103.8,16.7c0.1,0.3,0.1,0.6,0.1,0.9c11.6,1.9,20.4,11.9,20.4,24.1c0,13.5-10.9,24.4-24.4,24.4
+        S75.6,55.1,75.6,41.7c0-3.2,0.6-6.3,1.7-9.1c-0.3-0.2-0.5-0.3-0.7-0.5c-1.2,3-1.9,6.2-1.9,9.6c0,14,11.3,25.3,25.3,25.3
+        s25.3-11.3,25.3-25.3C125.3,29,115.9,18.5,103.8,16.7z" />
+
+                    <div class="extended-welcome-holder">
+                        <div class="extended-welcome-circles">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5669.29 5669.29">
+                                <defs>
+                                    <style>
+                                        .cla-1,
+                                        .cla-2,
+                                        .cla-3 {
+                                            fill: none;
+                                            stroke: #00a4a2;
+                                            stroke-miterlimit: 10;
+                                        }
+
+                                        .cla-1 {
+                                            stroke-width: 160px;
+                                        }
+
+                                        .cla-2 {
+                                            stroke-width: 90px;
+                                        }
+
+                                        .cla-3 {
+                                            stroke-width: 50px;
+                                        }
+                                    </style>
+                                </defs>
+                                <title>Extended Logo</title>
+                                <g id="thick-trans">
+                                    <circle class="cla-1" cx="2808.71" cy="2869.65" r="1346.46" />
+                                </g>
+                                <g id="thin-trans">
+                                    <circle class="cla-2" cx="2808.71" cy="2869.65" r="1559.06" />
+                                </g>
+                                <g id="outer-trans">
+                                    <circle class="cla-3" cx="2808.71" cy="2869.65" r="2055.12" />
+                                </g>
+                            </svg>
+                        </div>
+
+                        <div class="trans-lines-holder">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 5669.29 5669.29">
+                                <defs>
+                                    <style>
+                                        .cla-4 {
+                                            fill: none;
+                                            stroke: #FF9705;
+                                            stroke-miterlimit: 10;
+                                            stroke-width: 30px;
+                                        }
+                                    </style>
+                                </defs>
+                                <g class="trans-lines"> <!-- 90 lines -->
+                                    <line class="cla-4" x1="2829.21" y1="969.87" x2="2829.21" y2="1196.64" />
+                                    <line class="cla-4" x1="2961.08" y1="974.3" x2="2945.25" y2="1200.52" />
+                                    <line class="cla-4" x1="3092.33" y1="987.93" x2="3060.73" y2="1212.49" />
+                                    <line class="cla-4" x1="3222.3" y1="1010.7" x2="3175.1" y2="1232.51" />
+                                    <line class="cla-4" x1="3350.36" y1="1042.49" x2="3287.79" y2="1260.45" />
+                                    <line class="cla-4" x1="3475.89" y1="1083.14" x2="3398.25" y2="1296.2" />
+                                    <line class="cla-4" x1="3598.28" y1="1132.45" x2="3505.95" y2="1339.58" />
+                                    <line class="cla-4" x1="3716.92" y1="1190.2" x2="3610.35" y2="1390.37" />
+                                    <line class="cla-4" x1="3831.24" y1="1256.08" x2="3710.96" y2="1448.32" />
+                                    <line class="cla-4" x1="3940.68" y1="1329.79" x2="3807.27" y2="1513.17" />
+                                    <line class="cla-4" x1="4044.71" y1="1410.97" x2="3898.82" y2="1584.57" />
+                                    <line class="cla-4" x1="4142.82" y1="1499.2" x2="3985.15" y2="1662.2" />
+                                    <line class="cla-4" x1="4234.52" y1="1594.08" x2="4065.86" y2="1745.67" />
+                                    <line class="cla-4" x1="4319.37" y1="1695.12" x2="4140.54" y2="1834.56" />
+                                    <line class="cla-4" x1="4396.97" y1="1801.85" x2="4208.83" y2="1928.46" />
+                                    <line class="cla-4" x1="4466.91" y1="1913.73" x2="4270.4" y2="2026.9" />
+                                    <line class="cla-4" x1="4528.88" y1="2030.22" x2="4324.94" y2="2129.39" />
+                                    <line class="cla-4" x1="4582.56" y1="2150.76" x2="4372.19" y2="2235.44" />
+                                    <line class="cla-4" x1="4627.69" y1="2274.75" x2="4411.92" y2="2344.54" />
+                                    <line class="cla-4" x1="4664.05" y1="2401.59" x2="4443.94" y2="2456.14" />
+                                    <line class="cla-4" x1="4691.47" y1="2530.66" x2="4468.08" y2="2569.7" />
+                                    <line class="cla-4" x1="4709.81" y1="2661.33" x2="4484.24" y2="2684.68" />
+                                    <line class="cla-4" x1="4718.97" y1="2792.96" x2="4492.33" y2="2800.5" />
+                                    <line class="cla-4" x1="4718.93" y1="2924.91" x2="4492.31" y2="2916.6" />
+                                    <line class="cla-4" x1="4709.66" y1="3056.53" x2="4484.18" y2="3032.42" />
+                                    <line class="cla-4" x1="4691.23" y1="3187.19" x2="4467.98" y2="3147.39" />
+                                    <line class="cla-4" x1="4663.73" y1="3316.24" x2="4443.8" y2="3260.95" />
+                                    <line class="cla-4" x1="4627.27" y1="3443.05" x2="4411.74" y2="3372.54" />
+                                    <line class="cla-4" x1="4582.05" y1="3567.01" x2="4371.97" y2="3481.62" />
+                                    <line class="cla-4" x1="4528.29" y1="3687.51" x2="4324.68" y2="3587.65" />
+                                    <line class="cla-4" x1="4466.24" y1="3803.96" x2="4270.1" y2="3690.13" />
+                                    <line class="cla-4" x1="4396.21" y1="3915.79" x2="4208.5" y2="3788.54" />
+                                    <line class="cla-4" x1="4318.54" y1="4022.46" x2="4140.18" y2="3882.41" />
+                                    <line class="cla-4" x1="4233.61" y1="4123.44" x2="4065.46" y2="3971.29" />
+                                    <line class="cla-4" x1="4141.84" y1="4218.25" x2="3984.73" y2="4054.72" />
+                                    <line class="cla-4" x1="4043.67" y1="4306.42" x2="3898.36" y2="4132.32" />
+                                    <line class="cla-4" x1="3939.59" y1="4387.51" x2="3806.79" y2="4203.69" />
+                                    <line class="cla-4" x1="3830.1" y1="4461.15" x2="3710.46" y2="4268.5" />
+                                    <line class="cla-4" x1="3715.73" y1="4526.95" x2="3609.83" y2="4326.42" />
+                                    <line class="cla-4" x1="3597.04" y1="4584.61" x2="3505.41" y2="4377.18" />
+                                    <line class="cla-4" x1="3474.62" y1="4633.84" x2="3397.7" y2="4420.51" />
+                                    <line class="cla-4" x1="3349.06" y1="4674.4" x2="3287.22" y2="4456.22" />
+                                    <line class="cla-4" x1="3220.97" y1="4706.09" x2="3174.52" y2="4484.13" />
+                                    <line class="cla-4" x1="3090.99" y1="4728.77" x2="3060.15" y2="4504.1" />
+                                    <line class="cla-4" x1="2959.74" y1="4742.3" x2="2944.66" y2="4516.03" />
+                                    <line class="cla-4" x1="2827.86" y1="4746.65" x2="2828.62" y2="4519.88" />
+                                    <line class="cla-4" x1="2696" y1="4741.77" x2="2712.6" y2="4515.6" />
+                                    <line class="cla-4" x1="2564.8" y1="4727.69" x2="2597.15" y2="4503.24" />
+                                    <line class="cla-4" x1="2434.91" y1="4704.49" x2="2482.85" y2="4482.84" />
+                                    <line class="cla-4" x1="2306.95" y1="4672.27" x2="2370.26" y2="4454.52" />
+                                    <line class="cla-4" x1="2181.56" y1="4631.2" x2="2259.92" y2="4418.4" />
+                                    <line class="cla-4" x1="2059.34" y1="4581.47" x2="2152.37" y2="4374.66" />
+                                    <line class="cla-4" x1="1940.89" y1="4523.33" x2="2048.13" y2="4323.52" />
+                                    <line class="cla-4" x1="1826.79" y1="4457.06" x2="1947.73" y2="4265.22" />
+                                    <line class="cla-4" x1="1717.6" y1="4382.98" x2="1851.63" y2="4200.06" />
+                                    <line class="cla-4" x1="1613.85" y1="4301.46" x2="1760.33" y2="4128.34" />
+                                    <line class="cla-4" x1="1516.04" y1="4212.89" x2="1674.25" y2="4050.43" />
+                                    <line class="cla-4" x1="1424.66" y1="4117.71" x2="1593.83" y2="3966.69" />
+                                    <line class="cla-4" x1="1340.14" y1="4016.38" x2="1519.44" y2="3877.54" />
+                                    <line class="cla-4" x1="1262.91" y1="3909.4" x2="1451.47" y2="3783.42" />
+                                    <line class="cla-4" x1="1193.34" y1="3797.28" x2="1390.23" y2="3684.78" />
+                                    <line class="cla-4" x1="1131.76" y1="3680.58" x2="1336.04" y2="3582.1" />
+                                    <line class="cla-4" x1="1078.49" y1="3559.86" x2="1289.14" y2="3475.89" />
+                                    <line class="cla-4" x1="1033.78" y1="3435.72" x2="1249.78" y2="3366.66" />
+                                    <line class="cla-4" x1="997.84" y1="3308.76" x2="1218.14" y2="3254.95" />
+                                    <line class="cla-4" x1="970.86" y1="3179.6" x2="1194.37" y2="3141.3" />
+                                    <line class="cla-4" x1="952.96" y1="3048.87" x2="1178.61" y2="3026.28" />
+                                    <line class="cla-4" x1="944.24" y1="2917.21" x2="1170.91" y2="2910.43" />
+                                    <line class="cla-4" x1="944.73" y1="2785.26" x2="1171.32" y2="2794.33" />
+                                    <line class="cla-4" x1="954.43" y1="2653.67" x2="1179.84" y2="2678.53" />
+                                    <line class="cla-4" x1="973.3" y1="2523.07" x2="1196.42" y2="2563.62" />
+                                    <line class="cla-4" x1="1001.25" y1="2394.12" x2="1220.99" y2="2450.15" />
+                                    <line class="cla-4" x1="1038.12" y1="2267.43" x2="1253.42" y2="2338.66" />
+                                    <line class="cla-4" x1="1083.76" y1="2143.62" x2="1293.55" y2="2229.72" />
+                                    <line class="cla-4" x1="1137.93" y1="2023.31" x2="1341.2" y2="2123.84" />
+                                    <line class="cla-4" x1="1200.37" y1="1907.07" x2="1396.12" y2="2021.55" />
+                                    <line class="cla-4" x1="1270.78" y1="1795.47" x2="1458.06" y2="1923.35" />
+                                    <line class="cla-4" x1="1348.8" y1="1689.06" x2="1526.7" y2="1829.7" />
+                                    <line class="cla-4" x1="1434.07" y1="1588.36" x2="1601.71" y2="1741.08" />
+                                    <line class="cla-4" x1="1526.16" y1="1493.87" x2="1682.72" y2="1657.92" />
+                                    <line class="cla-4" x1="1624.62" y1="1406.03" x2="1769.35" y2="1580.61" />
+                                    <line class="cla-4" x1="1728.98" y1="1325.28" x2="1861.16" y2="1509.55" />
+                                    <line class="cla-4" x1="1838.72" y1="1252.02" x2="1957.71" y2="1445.07" />
+                                    <line class="cla-4" x1="1953.31" y1="1186.6" x2="2058.53" y2="1387.48" />
+                                    <line class="cla-4" x1="2072.19" y1="1129.34" x2="2163.12" y2="1337.08" />
+                                    <line class="cla-4" x1="2194.78" y1="1080.52" x2="2270.98" y2="1294.11" />
+                                    <line class="cla-4" x1="2320.47" y1="1040.38" x2="2381.58" y2="1258.77" />
+                                    <line class="cla-4" x1="2448.66" y1="1009.12" x2="2494.37" y2="1231.24" />
+                                    <line class="cla-4" x1="2578.73" y1="986.89" x2="2608.81" y2="1211.65" />
+                                    <line class="cla-4" x1="2710.02" y1="973.79" x2="2724.34" y2="1200.11" />
+                                </g>
+                        </div>
+
+                    </div>
+                </g>
+            </svg>
+
+            <div class="message">
+                Page not found
+            </div>
+        </div>
+
+    </div>
 </body>
+
 </html>
