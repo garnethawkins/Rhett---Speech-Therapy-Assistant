@@ -35,13 +35,108 @@
             align-items: center;
         }
 
+        /*#region speech therapy */
         #wordOrPhrase {
             color: white;
             position: fixed;
             top: 25%;
             left: 25%;
+            font-size: 50px;
         }
 
+        #start_rhett_btn {
+            border: seashell;
+            outline: none;
+            position: fixed;
+            left: 50%;
+            transform: translateX(0);
+            top: 80%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        #start_rhett_btn p {
+            font-size: 30px;
+        }
+
+        #start_rhett_btn img {
+            height: 300px;
+        }
+
+        #stop_rhett_btn {
+
+            left: 70%;
+
+            top: 29%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            display: none;
+        }
+
+        #stop_rhett_btn p {
+            font-size: 30px;
+        }
+
+        #stop_rhett_btn img {
+            height: 300px;
+            filter: blur(5px);
+        }
+
+        #rhett_listening {
+            display: none;
+            border: 10px solid rgba(238, 251, 255, 0.544);
+            border-radius: 10%;
+            opacity: 50%;
+            background-color: transparent;
+            outline: none;
+            position: fixed;
+            height: 15%;
+            width: 30%;
+            left: 35%;
+            font-size: larger;
+            font-weight: bold;
+            transform: translateX(0);
+            top: 75%;
+            justify-content: center;
+            align-items: center;
+            text-align: center
+        }
+
+        /*#endregion*/
+
+        /*#region stars*/
+        .correctspeech {
+            color: gold;
+            font-size: 100px;
+            position: fixed;
+            top: 0.25%;
+            left: 45%;
+            animation-name: spin;
+            animation-duration: 1000ms;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /*#endregion*/
+
+
+
+        /*#region not related to speech therapy*/
         button {
             color: black;
             /* top: 50%;
@@ -248,68 +343,6 @@
 
 
 
-        #start_rhett_btn {
-            border: seashell;
-            outline: none;
-            position: fixed;
-            left: 50%;
-            transform: translateX(0);
-            top: 80%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-        }
-
-        #start_rhett_btn p {
-            font-size: 30px;
-        }
-
-        #start_rhett_btn img {
-            height: 300px;
-        }
-
-        #stop_rhett_btn {
-
-            left: 70%;
-
-            top: 29%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            display: none;
-        }
-
-        #stop_rhett_btn p {
-            font-size: 30px;
-        }
-
-        #stop_rhett_btn img {
-            height: 300px;
-            filter: blur(5px);
-        }
-
-        #rhett_listening {
-            display: none;
-            border: 10px solid rgba(238, 251, 255, 0.544);
-            border-radius: 10%;
-            opacity: 50%;
-            background-color: transparent;
-            outline: none;
-            position: fixed;
-            height: 15%;
-            width: 30%;
-            left: 35%;
-            font-size: larger;
-            font-weight: bold;
-            transform: translateX(0);
-            top: 75%;
-            justify-content: center;
-            align-items: center;
-            text-align: center
-        }
-
 
 
 
@@ -393,6 +426,33 @@
         }
 
         @media (max-width:720px) {
+
+            #start_rhett_btn {
+                left: 50%;
+                top: 80vh;
+            }
+
+            #start_rhett_btn p {
+                font-size: 15px;
+            }
+
+            #stop_rhett_btn {
+
+                left: 50%;
+
+                top: 80vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                z-index: 9999;
+                display: none;
+            }
+
+            #stop_rhett_btn p {
+                font-size: 15px;
+                color: red
+            }
+
             .hide_on_small {
                 background-image: url('verticalbackground.png');
 
@@ -442,31 +502,6 @@
                 font-size: 10px
             }
 
-            #start_rhett_btn {
-                left: 50%;
-                top: 80vh;
-            }
-
-            #start_rhett_btn p {
-                font-size: 15px;
-            }
-
-            #stop_rhett_btn {
-
-                left: 50%;
-
-                top: 80vh;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                z-index: 9999;
-                display: none;
-            }
-
-            #stop_rhett_btn p {
-                font-size: 15px;
-                color: red
-            }
 
             .left_links {
                 left: 5vw;
@@ -542,6 +577,7 @@
 
         }
 
+        /*#endregion*/
         /* @media (max-width: 300px) {
             .hide_on_small {
                 display: none;
@@ -585,7 +621,7 @@
         <div class="battery cont">
             <p id="battery"></p>
         </div>
-
+        <p class="correctspeech" id="thatiscorrect"></p>
         <!-- <img src="./iron_man.gif" id="iron_man" /> -->
     </div>
 
@@ -624,13 +660,13 @@
             recognition.start()
             //check level
             const lvlcheck = localStorage.getItem("lvl")
-            if (!lvlcheck) {
-                localStorage.setItem("lvl", 'level1')
-                readOut('systems are now fully operational, lets get started')
-            }
-            else {
-                readOut('systems are now fully operational, shall we continue?')
-            }
+            // if (!lvlcheck) {
+            //     localStorage.setItem("lvl", 'level1')
+            //     readOut('systems are now fully operational, lets get started')
+            // }
+            // else {
+            //     readOut('systems are now fully operational, shall we continue?')
+            // }
 
             //console.log(localStorage.getItem('score'))
 
@@ -1025,7 +1061,7 @@
         //#endregion
 
         //#region onresult and key purpose
-        recognition.onresult = function (event) {
+        recognition.onresult = async function (event) {
             let current = event.resultIndex;
             let transcript = event.results[current][0].transcript;
             transcript = transcript.toLowerCase();
@@ -1036,7 +1072,7 @@
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
             //#region if result is over certain confidence level enter into text area
-            if (event.results[current][0].confidence > .6) {
+            if (event.results[current][0].confidence > .5) {
                 document.querySelector("#rhett_listening").textContent = transcript;
                 const checkword = transcript;
                 const correctword = document.getElementById('wordOrPhrase').textContent
@@ -1062,6 +1098,8 @@
                     ];
 
                     const ThatWasCorrect = correctList[Math.floor(Math.random() * correctList.length)];
+                    document.getElementById('thatiscorrect').style = 'display: block'
+                    document.getElementById('thatiscorrect').innerHTML = "⭐"
 
                     readOut(ThatWasCorrect)
                     //#endregion
@@ -1315,8 +1353,8 @@
                     //     localStorage.setItem('score', '80')
                     // }
                     //#endregion
-
-
+                    await new Promise(resolve => setTimeout(resolve, 3000));
+                    document.getElementById('thatiscorrect').style = 'display: none'
                     //#endregion
                     //console.log(score)
                     //#region get a new word
@@ -1712,19 +1750,19 @@
                     //console.log('try again')
                     document.getElementById('wordOrPhrase').style = 'color:red;'
                     //#region rhett response to incorrect text
-                    const correctList = [
-                        "I'm sorry sir, that was incorrect",
-                        "please try again",
-                        "I might have miss heard you, could you please repeat that?",
-                        "Once more?",
-                        "Nice try master Hawkins, but that wasn't quite right",
-                        "could we try that one again please sir?"
+                    // const correctList = [
+                    //     "I'm sorry sir, that was incorrect",
+                    //     "please try again",
+                    //     "I might have miss heard you, could you please repeat that?",
+                    //     "Once more?",
+                    //     "Nice try master Hawkins, but that wasn't quite right",
+                    //     "could we try that one again please sir?"
 
-                    ];
+                    // ];
 
-                    const ThatWasCorrect = correctList[Math.floor(Math.random() * correctList.length)];
+                    // const ThatWasCorrect = correctList[Math.floor(Math.random() * correctList.length)];
 
-                    readOut(ThatWasCorrect)
+                    // readOut(ThatWasCorrect)
                     //#endregion
                 }
                 //#endregion
